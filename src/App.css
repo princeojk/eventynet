@@ -1,0 +1,10 @@
+body {
+  background: 
+    linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
+    radial-gradient(ellipse at center, #4a4a4a 0%, #2c2c2c 50%, #1a1a1a 100%);
+  background-size: 60px 60px, 60px 60px, 60px 60px, 60px 60px, 100% 100%;
+  position: relative;
+}
