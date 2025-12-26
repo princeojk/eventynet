@@ -1,0 +1,45 @@
+.card {
+  background-color: #f7ead8;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 250px;
+  max-width: 300px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.status {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 12px;
+  color: #555;
+}
+
+.prices {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+
+.payouts {
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+}

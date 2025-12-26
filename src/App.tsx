@@ -1,14 +1,13 @@
-import Hero from './components/Hero/Hero'
-import './App.css'
+import Home from "./pages/Home";
+import PlaceBet from "./pages/PlaceBet";
+import "./App.css";
 
 function App() {
-
-
   return (
     <>
-      <Hero />
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
