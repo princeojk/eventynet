@@ -28,14 +28,10 @@ const EventsCard: React.FC<EventsCardProps> = ({
 
       <div className={css.header}>{event.question}</div>
 
-      <div className={css.payouts}>
-        <p>Deposit: ₦{displayAmount}</p>
-      </div>
-
       <div className={css.optionsContainer}>
         {event.eventOptions.map((option) => (
-          <div key={option.id} className={css.optionCard}>
-            {option.title && <p className={css.optionName}>{option.title}</p>}
+          <div key={option.id}>
+            {option.title && <p>{option.title}</p>}
             <div className={css.buttonGroup}>
               <Button
                 size="small"
@@ -45,30 +41,40 @@ const EventsCard: React.FC<EventsCardProps> = ({
                   setOption(option);
                 }}
               >
-                YES ₦{option.yesPrice}
+                <div>
+                  <p>YES</p>
+                  <p>₦{option.yesPrice}</p>
+                </div>
               </Button>
               <Button
                 size="small"
-                color="red"
+                color="pink"
                 onClick={() => {
                   setSide("NO");
                   setOption(option);
                 }}
               >
-                NO ₦{option.noPrice}
+                <div>
+                  <p>NO</p>
+                  <p>₦{option.noPrice}</p>
+                </div>
               </Button>
             </div>
             <div className={css.payouts}>
-              <p>YES: ₦{calPayout(displayAmount, option.yesPrice)}</p>
-              <p>NO: ₦{calPayout(displayAmount, option.noPrice)}</p>
+              <p>1k to win ₦{calPayout(displayAmount, option.yesPrice)}</p>
+              <p>1k to win ₦{calPayout(displayAmount, option.noPrice)}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <div className={css.status}>
-        <p>Status: {event.status}</p>
-        <p>Closes at: {event.closesAt}</p>
+      <div className={css.statusTime}>
+        <p>
+          Status: <strong>{event.status}</strong>
+        </p>
+        <p>
+          Closes at: <strong>{event.closesAt}</strong>
+        </p>
       </div>
     </div>
   );

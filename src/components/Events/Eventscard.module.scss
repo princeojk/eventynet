@@ -1,33 +1,67 @@
 .card {
-  background: #fff;
+  background: #f6f2f2;
   border-radius: 12px;
-  padding: 5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   max-width: 280px;
   min-width: 200px;
+
+  @media (max-width: 768px) {
+    .card {
+      text-align: center;
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    text-align: center;
+    margin-left: 0;
+  }
 }
 
 .cardImage {
   width: 30%;
-  height: 50px;           
+  height: 50px;
   object-fit: cover;
   border-radius: 2px;
 }
 
 .buttonGroup {
   display: flex;
-  gap: 6px;
+  gap: 8rem;
   margin-top: 4px;
+  align-content: center;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    margin-left: 0;
+  }
 }
 
 .buttonGroup button {
   font-size: 0.85rem;
   min-width: 0;
+  padding: 0 1rem;
 }
 
 .payouts {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 2rem;
 }
 
+.statusTime {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 5rem;
+}
+
+.header {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-top: 0.2rem;
+  color: #1f2937;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}

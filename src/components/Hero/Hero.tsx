@@ -27,15 +27,8 @@ const binaryEvent: Event[] = [
     eventOptions: [
       {
         id: "cand-a",
-        title: "Candidate A",
         yesPrice: 60,
         noPrice: 40,
-      },
-      {
-        id: "cand-b",
-        title: "Candidate B",
-        yesPrice: 55,
-        noPrice: 45,
       },
     ],
     imageUrl: "https://example.com/governor.jpg",
@@ -62,15 +55,8 @@ const binaryEvent: Event[] = [
     eventOptions: [
       {
         id: "cand-a",
-        title: "Candidate A",
         yesPrice: 60,
         noPrice: 40,
-      },
-      {
-        id: "cand-b",
-        title: "Candidate B",
-        yesPrice: 55,
-        noPrice: 45,
       },
     ],
     imageUrl: "https://example.com/governor.jpg",
@@ -97,15 +83,8 @@ const binaryEvent: Event[] = [
     eventOptions: [
       {
         id: "cand-a",
-        title: "Candidate A",
         yesPrice: 60,
         noPrice: 40,
-      },
-      {
-        id: "cand-b",
-        title: "Candidate B",
-        yesPrice: 55,
-        noPrice: 45,
       },
     ],
     imageUrl: "https://example.com/governor.jpg",
@@ -125,7 +104,7 @@ function Hero() {
           </Button>
         </div>
         <div className={css.mainText}>
-          <h1>Best Event Predictions Platform</h1>
+          <h1>Event Predictions Platform</h1>
         </div>
         <div className={css.eventsList}>
           <EventList events={binaryEvent} />

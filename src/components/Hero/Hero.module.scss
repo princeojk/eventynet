@@ -1,4 +1,7 @@
 .heroContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
@@ -13,27 +16,28 @@
   z-index: 10;
 }
 
+.authButtons button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+}
+
 .mainText {
+  position: relative;
   margin-bottom: 2rem;
   margin-top: 3rem;
-  margin-left: 0.8rem;
-  text-align: left;
+  text-align: center;
 
   h1 {
     font-size: 3.5rem;
     font-weight: 900;
     margin: 0 0 1rem 0;
-    background: linear-gradient(135deg, #ff6b35, #f7931e, #ffd700);
+    background: linear-gradient(135deg, #130602, #b1722b, #b6a545);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
     line-height: 1.1;
-
-    background-size: 200% 200%;
-    animation: gradientShift 3s ease infinite;
   }
 
   /* Mobile responsive */

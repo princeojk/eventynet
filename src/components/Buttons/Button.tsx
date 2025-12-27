@@ -3,7 +3,7 @@ import css from "./Button.module.scss";
 export interface ButtonProps {
   children: React.ReactNode;
   size?: "small" | "medium" | "large";
-  color?: "blue" | "green" | "red" | "gray" | "orange";
+  color?: "blue" | "green" | "red" | "gray" | "orange" | "pink";
   onClick?: () => void;
   disabled?: boolean;
 }
