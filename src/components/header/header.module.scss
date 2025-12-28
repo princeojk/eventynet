@@ -1,0 +1,48 @@
+.mainText {
+  position: relative;
+  margin-bottom: -2rem;
+  margin-top: 1rem;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #130602, #b1722b, #b6a545);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+    line-height: 1.1;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    text-align: center;
+    margin-left: 0;
+
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
+
+.headerContainer {
+  display: grid;
+}
+
+.divider {
+  width: 100vw;
+  height: 1px;
+  background: rgb(234, 215, 215);
+  margin: 2rem 0;
+  justify-items: center;
+}

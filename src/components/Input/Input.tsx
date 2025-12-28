@@ -1,6 +1,6 @@
 import css from "./Input.module.scss";
 
-export interface InputProps {
+interface InputProps {
   children: React.ReactNode;
   size: number;
   id: string;

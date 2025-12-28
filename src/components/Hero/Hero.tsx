@@ -1,4 +1,3 @@
-import Button from "../Buttons/Button";
 import winner from "../../assets/images/winner.jpg";
 import css from "./Hero.module.scss";
 import type { Event } from "../../types";
@@ -95,17 +94,6 @@ function Hero() {
   return (
     <>
       <div className={css.heroContainer}>
-        <div className={css.authButtons}>
-          <Button size="small" color="orange">
-            login
-          </Button>
-          <Button size="small" color="orange">
-            sign up
-          </Button>
-        </div>
-        <div className={css.mainText}>
-          <h1>Event Predictions Platform</h1>
-        </div>
         <div className={css.eventsList}>
           <EventList events={binaryEvent} />
         </div>

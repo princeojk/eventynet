@@ -1,21 +1,26 @@
 .eventGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
+  // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
-  padding: 12px;
   position: relative;
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 12px;
+  padding: 2.5rem;
   justify-content: center;
+  width: 85%;
+}
+
+@media (max-width: 1024px) {
+  .eventGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .eventGrid {
     display: flex;
     flex-direction: column;
-
-    height: calc(100vh - 200px);
+    width: 100vw;
     overflow-y: auto;
 
     scroll-snap-type: y mandatory;
@@ -26,18 +31,4 @@
   .eventGrid > * {
     scroll-snap-align: start;
   }
-}
-
-.eventGrid::before {
-  content: "";
-  position: absolute;
-  top: -16px;
-  left: 50%;
-  align-items: center;
-
-  width: 100vw;
-  height: 1px;
-  background: rgb(234, 215, 215);
-  margin-left: -50vw;
-  margin-right: -50vw;
 }
