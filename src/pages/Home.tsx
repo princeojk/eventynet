@@ -4,11 +4,16 @@ import Profile from "./Profile";
 import SignUp from "./SignUp";
 import { Route, Routes } from "react-router-dom";
 import Header from "../components/header/header";
+import { navBarContext } from "../context";
 
 const Home = () => {
+  const user = "";
   return (
     <>
-      <Header user="user" />
+      <navBarContext.Provider value={user}>
+        <Header />
+      </navBarContext.Provider>
+
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route path="/login" element={<Login />} />

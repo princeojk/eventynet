@@ -2,15 +2,12 @@ import React from "react";
 import MainNavbar from "../navbars/mainNavbar/mainNavbar";
 import css from "./header.module.scss";
 
-interface headerProps {
-  user: string;
-}
+// interface headerProps {}
 
-const user = "d";
-const Header: React.FC<headerProps> = () => {
+const Header: React.FC = () => {
   return (
     <div className={css.headerContainer}>
-      <MainNavbar user={user} />
+      <MainNavbar />
       <div className={css.mainText}>
         <h1>Event Predictions Platform</h1>
       </div>
