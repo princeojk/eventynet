@@ -2,7 +2,7 @@ export type Side = "YES" | "NO";
 
 type MarketStatus = "OPEN" | "CLOSED";
 
-interface EventOptions {
+export interface EventOptions {
   id: string;
   title?: string;
   yesPrice: number;
@@ -15,6 +15,7 @@ export interface Event {
   closesAt: string;
   status: MarketStatus;
   eventOptions: EventOptions[];
+  amountTraded: number;
 
   imageUrl?: string;
 }

@@ -3,7 +3,7 @@ import Login from "./Login";
 import Profile from "./Profile";
 import SignUp from "./SignUp";
 import { Route, Routes } from "react-router-dom";
-import Header from "../components/header/header";
+import Header from "../components/header/Header";
 import { navBarContext } from "../context";
 
 const Home = () => {
