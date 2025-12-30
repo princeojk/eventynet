@@ -3,8 +3,7 @@ import { useState } from "react";
 import type { Event, Side, EventOptions } from "../../types";
 import Button from "../Buttons/Button";
 import css from "./EventsCard.module.scss";
-import TradeModal from "../tradeModal/TradeModal";
-
+import { calPayout } from "../../utils/calculatePayout";
 interface EventsCardProps {
   event: Event;
   displayAmount?: number;
@@ -17,12 +16,9 @@ const EventsCard: React.FC<EventsCardProps> = ({
   onOpenModal,
 }) => {
   const [, setSide] = useState<Side | null>(null);
-  const [, setOption] = useState<EventOptions | null>(null);
+  const [option, setOption] = useState<EventOptions | null>(null);
   const [, setIsModalOpen] = useState(false);
   const isActive = event.status === "OPEN";
-  const calPayout = (amount: number, price: number) => {
-    return Math.floor((amount * 100) / price);
-  };
 
   return (
     <>

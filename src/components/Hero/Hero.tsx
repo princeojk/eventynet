@@ -118,8 +118,12 @@ function Hero() {
         <div className={css.eventsList}>
           <EventList events={binaryEvent} onOpenModal={openTradeModal} />
         </div>
-        {modalData.event && modalData.side && (
-          <TradeModal event={modalData.event} side={modalData.side} />
+        {modalData.event && modalData.side && modalData.option && (
+          <TradeModal
+            event={modalData.event}
+            side={modalData.side}
+            option={modalData.option}
+          />
         )}
       </div>
     </>

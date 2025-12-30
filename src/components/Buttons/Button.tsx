@@ -1,6 +1,6 @@
 import css from "./Button.module.scss";
 
-export interface ButtonProps {
+interface ButtonProps {
   children: React.ReactNode;
   size?: "small" | "medium" | "large";
   color?: "blue" | "green" | "red" | "gray" | "orange" | "pink";
