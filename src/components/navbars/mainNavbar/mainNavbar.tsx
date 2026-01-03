@@ -1,12 +1,12 @@
 import React from "react";
 import css from "./mainNavbar.module.scss";
 import { NavLink } from "react-router-dom";
-import { useNavBarContext } from "../../../context";
+import { useAuth } from "../../../auth/authContextHook";
 
 // interface MainNavbarProps {}
 
 const MainNavbar: React.FC = () => {
-  const user = useNavBarContext();
+  const { user } = useAuth();
 
   return (
     <nav className={css.mainNavbar}>

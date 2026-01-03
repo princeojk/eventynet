@@ -19,3 +19,9 @@ export interface Event {
 
   imageUrl?: string;
 }
+
+export interface User {
+  id: number;
+  userName: string;
+  email: string;
+}

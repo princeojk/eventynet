@@ -5,21 +5,21 @@ import SignUp from "./SignUp";
 import { Route, Routes } from "react-router-dom";
 import Header from "../components/header/Header";
 import { navBarContext } from "../context";
+import { AuthProvider } from "../auth/AuthContext";
 
 const Home = () => {
-  const user = "";
   return (
     <>
-      <navBarContext.Provider value={user}>
+      <AuthProvider>
         <Header />
-      </navBarContext.Provider>
 
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </AuthProvider>
     </>
   );
 };
