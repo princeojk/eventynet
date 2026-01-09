@@ -5,7 +5,7 @@ type BalanceData = {
   amount: number;
   currency: string;
 };
-export const useBalance= (): UseQueryResult<BalanceData, Error> => {
+export const useBalance = (): UseQueryResult<BalanceData, Error> => {
   return useQuery({
     queryKey: ["balance"],
     queryFn: getBalance,

@@ -5,6 +5,8 @@ import css from "./profile.module.scss";
 import AccountBalance from "../AccountBalance/AccountBalance";
 import { useState } from "react";
 import DepositModal from "../../depositModal/DepositModal";
+import TradeStats from "../tradeStats/TradeStats";
+import OpenTrades from "../openTrades/OpenTrades";
 
 const Profile: React.FC = () => {
   //   const { user } = useAuth();
@@ -33,8 +35,10 @@ const Profile: React.FC = () => {
 
   return (
     <div className={css.profileContainer}>
-      <AccountBalance onOpenModel={handleOnOpenModal} />
       <UserAvatar user={user} />
+      <AccountBalance onOpenModel={handleOnOpenModal} />
+      <TradeStats />
+      <OpenTrades />
       {depostModal && <DepositModal onClose={handleOnClose} />}
     </div>
   );

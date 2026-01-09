@@ -1,0 +1,22 @@
+.tradeContainer {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: space-between; 
+}
+
+.title {
+  margin: 0.5rem 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #070707;
+  text-transform: uppercase;
+}
+
+.value {
+  margin: 0.5rem 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #193e2d;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
