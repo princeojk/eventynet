@@ -7,7 +7,9 @@ interface InputProps {
   inputSize: number;
   color: string;
   layout: "vertical" | "horizontal";
+  placeholder: string;
   onChange: (amount: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,6 +20,8 @@ const Input: React.FC<InputProps> = ({
   color,
   layout,
   onChange,
+  placeholder,
+  type,
 }) => {
   const inputContainerClass = `${css.input} ${css[`input--${containerSize}`]} ${
     css[`input--${color}`]
@@ -30,6 +34,8 @@ const Input: React.FC<InputProps> = ({
         size={inputSize}
         className={css.inputField}
         onChange={onChange}
+        placeholder={placeholder}
+        type={type}
       />
     </div>
   );

@@ -1,5 +1,7 @@
+import Signup from "../components/SignUp/SignUp";
+
 const SignUp = () => {
-  return <h1>SignUp</h1>;
+  return <Signup />;
 };
 
 export default SignUp;

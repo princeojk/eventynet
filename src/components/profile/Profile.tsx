@@ -7,19 +7,12 @@ import { useState } from "react";
 import DepositModal from "../../depositModal/DepositModal";
 import TradeStats from "../tradeStats/TradeStats";
 import OpenTrades from "../openTrades/OpenTrades";
+import Button from "../Buttons/Button";
+import { useAuth } from "../../auth/authContextHook";
 
 const Profile: React.FC = () => {
-  //   const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [depostModal, setDepositModal] = useState(false);
-
-  const user = {
-    id: 1,
-    userName: "hahah",
-    firstName: "hele",
-    lastName: "ss",
-    email: "ss",
-    imageUrl: userImage,
-  };
 
   if (!user) {
     return null;
@@ -40,6 +33,9 @@ const Profile: React.FC = () => {
       <TradeStats />
       <OpenTrades />
       {depostModal && <DepositModal onClose={handleOnClose} />}
+      <div className={css.signOut}>
+        <Button onClick={logout}>Sign out</Button>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,57 @@
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #130602, #b1722b, #b6a545);
+  background-clip: text;
+  letter-spacing: 1.5px;
+  text-shadow: 0 4px 8px rgba(177, 114, 43, 0.25);
+}
+
+.name,
+.email,
+.password,
+.confirmPassword {
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: #b00020;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.signUpButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.container {
+  max-width: 60vb;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(19, 6, 2, 0.15);
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .signUpButton {
+    margin-top: 1.2rem;
+  }
+}
+
+.registered {
+  margin-top: 5rem;
+  text-align: center;
+}

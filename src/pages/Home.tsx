@@ -16,7 +16,7 @@ const Home = () => {
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route
             path="/profile"
             element={

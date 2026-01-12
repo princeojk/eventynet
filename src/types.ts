@@ -21,10 +21,8 @@ export interface Event {
 }
 
 export interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
+  id: string;
+  displayName: string | null;
+  email: string | null;
   imageUrl?: string;
 }
