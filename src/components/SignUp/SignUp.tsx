@@ -32,7 +32,7 @@ const Signup = () => {
             setError("Email is already registered");
             break;
           case "auth/weak-password":
-            setError("Pass must be at least 6 characters.");
+            setError("Password must be at least 6 characters.");
             break;
           case "auth/invalid-email":
             setError("invalid Email");
@@ -102,7 +102,7 @@ const Signup = () => {
           placeholder="Confirm your password"
           type="password"
         >
-          ConfirmPassord
+          Confirm Passord
         </Input>
       </div>
       {error && <p className={css.error}>{error}</p>}

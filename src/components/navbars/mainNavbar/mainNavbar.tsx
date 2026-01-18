@@ -5,7 +5,7 @@ import { useAuth } from "../../../auth/authContextHook";
 import Button from "../../Buttons/Button";
 
 const MainNavbar: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   return (
     <nav className={css.mainNavbar}>
