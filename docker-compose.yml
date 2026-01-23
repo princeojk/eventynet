@@ -3,7 +3,7 @@ version: "3.9"
 services:
   mysql:
     image: mysql:8.0
-    container_name: eventNet-mysql
+    container_name: eventynet-mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -13,7 +13,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - betgidi_mysql_data:/var/lib/mysql
+      - eventynet_mysql_data:/var/lib/mysql
 
 volumes:
-  betgidi_mysql_data:
+  eventynet_mysql_data:
