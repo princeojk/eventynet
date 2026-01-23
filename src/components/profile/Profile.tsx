@@ -1,6 +1,5 @@
 // import { useAuth } from "../../auth/authContextHook";
 import UserAvatar from "../userAvatar/UserAvatar";
-import userImage from "../../assets/images/user.png";
 import css from "./profile.module.scss";
 import AccountBalance from "../AccountBalance/AccountBalance";
 import { useState } from "react";

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../Input/Input";
 import css from "./login.module.scss";
 import Button from "../Buttons/Button";
-import { signInWithEmailAndPassword, signInWithRedirect } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../firebase";
 import { FirebaseError } from "firebase/app";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ const LoginComponent: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLoginWithGoogle = async () => {
-    await signInWithRedirect(auth, provider);
+    await signInWithPopup(auth, provider);
     navigate("/");
   };
 
@@ -71,7 +71,7 @@ const LoginComponent: React.FC = () => {
           </Button>
         </div>
         <div className={css.loginButton}>
-          <Button size="small" onClick={handleLoginWithGoogle}>
+          <Button size="small" onClick={handleLoginWithGoogle} color="red">
             Sign In With Google
           </Button>
         </div>
