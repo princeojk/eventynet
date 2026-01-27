@@ -29,3 +29,4 @@ dist-ssr
 
 localhost+1-key.pem
 localhost+1.pem
+/src/generated/prisma
