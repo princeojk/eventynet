@@ -6,14 +6,16 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+import { useAuth } from "../../auth/authContextHook";
 
 const Signup = () => {
-  const [userName, setUserName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { token, logout } = useAuth();
 
   const navigate = useNavigate();
 
@@ -23,7 +25,12 @@ const Signup = () => {
       if (password !== confirmPassword) {
         throw new Error("Passwords do not match");
       }
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      createUser(userCredential.user.uid);
       navigate("/");
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
@@ -48,6 +55,38 @@ const Signup = () => {
     }
   };
 
+  const createUser = async (uid: string) => {
+    if (!uid) {
+      console.log("tk uid", uid);
+      return;
+    }
+
+    const url = import.meta.env.VITE_PUBLIC_BASE_URL + "auth/signup";
+
+    const body = {
+      uid: uid,
+      name: name,
+      email: email,
+    };
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: new Headers({
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const msg = await res.json();
+        console.log(msg);
+      }
+    } catch {
+      throw new Error("An error occurred");
+    }
+  };
+
   return (
     <div className={css.container}>
       <p className={css.title}>Sign up</p>
@@ -58,7 +97,7 @@ const Signup = () => {
           color="black"
           layout="horizontal"
           inputSize={30}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Enter your name"
         >
           Name

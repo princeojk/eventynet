@@ -4,10 +4,11 @@ import type { User } from "../types";
 interface AuthContextType {
   user: User | null;
   logout: () => void;
+  token: string;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useAuth = () => {
