@@ -2,11 +2,12 @@ import { useState } from "react";
 import Input from "../Input/Input";
 import css from "./signup.module.scss";
 import Button from "../Buttons/Button";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, type User } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 import { useAuth } from "../../auth/authContextHook";
+import { saveUser } from "../../api/auth";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -15,7 +16,7 @@ const Signup = () => {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { token, logout } = useAuth();
+  const { token } = useAuth();
 
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const Signup = () => {
         email,
         password,
       );
-      createUser(userCredential.user.uid);
+      await createUser(userCredential.user);
       navigate("/");
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
@@ -55,36 +56,12 @@ const Signup = () => {
     }
   };
 
-  const createUser = async (uid: string) => {
-    if (!uid) {
-      console.log("tk uid", uid);
+  const createUser = async (user: User) => {
+    if (!user) {
       return;
     }
 
-    const url = import.meta.env.VITE_PUBLIC_BASE_URL + "auth/signup";
-
-    const body = {
-      uid: uid,
-      name: name,
-      email: email,
-    };
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: new Headers({
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        }),
-        body: JSON.stringify(body),
-      });
-
-      if (!res.ok) {
-        const msg = await res.json();
-        console.log(msg);
-      }
-    } catch {
-      throw new Error("An error occurred");
-    }
+    await saveUser(user, name, email, token);
   };
 
   return (
