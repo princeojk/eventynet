@@ -1,11 +1,13 @@
+import { auth } from "../firebase";
+
 export const placetrade = async (
   eventId: number,
   side: string,
   price: number,
   amount: number,
-  token: string,
 ) => {
-  const url = import.meta.env.VITE_PUBLIC_BASE_URL + "v1/trades/placeTrade";
+  const url = import.meta.env.VITE_PUBLIC_BASE_URL + "v1/orders/placeOrder";
+  const token = await auth.currentUser?.getIdToken();
 
   const body = {
     eventId: eventId,

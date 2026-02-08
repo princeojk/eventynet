@@ -6,7 +6,6 @@ import { createUserWithEmailAndPassword, type User } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
-import { useAuth } from "../../auth/authContextHook";
 import { saveUser } from "../../api/auth";
 
 const Signup = () => {
@@ -16,7 +15,6 @@ const Signup = () => {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { token } = useAuth();
 
   const navigate = useNavigate();
 
@@ -61,7 +59,7 @@ const Signup = () => {
       return;
     }
 
-    await saveUser(user, name, email, token);
+    await saveUser(user, name, email);
   };
 
   return (

@@ -1,12 +1,9 @@
 import type { User } from "firebase/auth";
 
-export const saveUser = async (
-  user: User,
-  name: string,
-  email: string,
-  token: string,
-) => {
+export const saveUser = async (user: User, name: string, email: string) => {
   const url = import.meta.env.VITE_PUBLIC_BASE_URL + "v1/auth/signup";
+
+  const token = await user.getIdToken();
 
   const body = {
     name: name,

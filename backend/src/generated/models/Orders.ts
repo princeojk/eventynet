@@ -31,6 +31,7 @@ export type OrdersAvgAggregateOutputType = {
   eventId: number | null
   userId: number | null
   price: runtime.Decimal | null
+  amount: runtime.Decimal | null
 }
 
 export type OrdersSumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type OrdersSumAggregateOutputType = {
   eventId: number | null
   userId: number | null
   price: runtime.Decimal | null
+  amount: runtime.Decimal | null
 }
 
 export type OrdersMinAggregateOutputType = {
@@ -46,6 +48,7 @@ export type OrdersMinAggregateOutputType = {
   userId: number | null
   side: string | null
   price: runtime.Decimal | null
+  amount: runtime.Decimal | null
   createdAt: Date | null
 }
 
@@ -55,6 +58,7 @@ export type OrdersMaxAggregateOutputType = {
   userId: number | null
   side: string | null
   price: runtime.Decimal | null
+  amount: runtime.Decimal | null
   createdAt: Date | null
 }
 
@@ -64,6 +68,7 @@ export type OrdersCountAggregateOutputType = {
   userId: number
   side: number
   price: number
+  amount: number
   createdAt: number
   _all: number
 }
@@ -74,6 +79,7 @@ export type OrdersAvgAggregateInputType = {
   eventId?: true
   userId?: true
   price?: true
+  amount?: true
 }
 
 export type OrdersSumAggregateInputType = {
@@ -81,6 +87,7 @@ export type OrdersSumAggregateInputType = {
   eventId?: true
   userId?: true
   price?: true
+  amount?: true
 }
 
 export type OrdersMinAggregateInputType = {
@@ -89,6 +96,7 @@ export type OrdersMinAggregateInputType = {
   userId?: true
   side?: true
   price?: true
+  amount?: true
   createdAt?: true
 }
 
@@ -98,6 +106,7 @@ export type OrdersMaxAggregateInputType = {
   userId?: true
   side?: true
   price?: true
+  amount?: true
   createdAt?: true
 }
 
@@ -107,6 +116,7 @@ export type OrdersCountAggregateInputType = {
   userId?: true
   side?: true
   price?: true
+  amount?: true
   createdAt?: true
   _all?: true
 }
@@ -203,6 +213,7 @@ export type OrdersGroupByOutputType = {
   userId: number
   side: string
   price: runtime.Decimal
+  amount: runtime.Decimal
   createdAt: Date
   _count: OrdersCountAggregateOutputType | null
   _avg: OrdersAvgAggregateOutputType | null
@@ -235,6 +246,7 @@ export type OrdersWhereInput = {
   userId?: Prisma.IntFilter<"Orders"> | number
   side?: Prisma.StringFilter<"Orders"> | string
   price?: Prisma.DecimalFilter<"Orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFilter<"Orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
 }
 
@@ -244,6 +256,7 @@ export type OrdersOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   side?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _relevance?: Prisma.OrdersOrderByRelevanceInput
 }
@@ -257,6 +270,7 @@ export type OrdersWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"Orders"> | number
   side?: Prisma.StringFilter<"Orders"> | string
   price?: Prisma.DecimalFilter<"Orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFilter<"Orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
 }, "id">
 
@@ -266,6 +280,7 @@ export type OrdersOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   side?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.OrdersCountOrderByAggregateInput
   _avg?: Prisma.OrdersAvgOrderByAggregateInput
@@ -283,6 +298,7 @@ export type OrdersScalarWhereWithAggregatesInput = {
   userId?: Prisma.IntWithAggregatesFilter<"Orders"> | number
   side?: Prisma.StringWithAggregatesFilter<"Orders"> | string
   price?: Prisma.DecimalWithAggregatesFilter<"Orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalWithAggregatesFilter<"Orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Orders"> | Date | string
 }
 
@@ -291,6 +307,7 @@ export type OrdersCreateInput = {
   userId: number
   side: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt: Date | string
 }
 
@@ -300,6 +317,7 @@ export type OrdersUncheckedCreateInput = {
   userId: number
   side: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt: Date | string
 }
 
@@ -308,6 +326,7 @@ export type OrdersUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   side?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -317,6 +336,7 @@ export type OrdersUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   side?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -326,6 +346,7 @@ export type OrdersCreateManyInput = {
   userId: number
   side: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt: Date | string
 }
 
@@ -334,6 +355,7 @@ export type OrdersUpdateManyMutationInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   side?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -343,6 +365,7 @@ export type OrdersUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   side?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -358,6 +381,7 @@ export type OrdersCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   side?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -366,6 +390,7 @@ export type OrdersAvgOrderByAggregateInput = {
   eventId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
 }
 
 export type OrdersMaxOrderByAggregateInput = {
@@ -374,6 +399,7 @@ export type OrdersMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   side?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -383,6 +409,7 @@ export type OrdersMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   side?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -391,6 +418,7 @@ export type OrdersSumOrderByAggregateInput = {
   eventId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
 }
 
 
@@ -401,6 +429,7 @@ export type OrdersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   userId?: boolean
   side?: boolean
   price?: boolean
+  amount?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["orders"]>
 
@@ -412,10 +441,11 @@ export type OrdersSelectScalar = {
   userId?: boolean
   side?: boolean
   price?: boolean
+  amount?: boolean
   createdAt?: boolean
 }
 
-export type OrdersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "userId" | "side" | "price" | "createdAt", ExtArgs["result"]["orders"]>
+export type OrdersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "userId" | "side" | "price" | "amount" | "createdAt", ExtArgs["result"]["orders"]>
 
 export type $OrdersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Orders"
@@ -426,6 +456,7 @@ export type $OrdersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     userId: number
     side: string
     price: runtime.Decimal
+    amount: runtime.Decimal
     createdAt: Date
   }, ExtArgs["result"]["orders"]>
   composites: {}
@@ -801,6 +832,7 @@ export interface OrdersFieldRefs {
   readonly userId: Prisma.FieldRef<"Orders", 'Int'>
   readonly side: Prisma.FieldRef<"Orders", 'String'>
   readonly price: Prisma.FieldRef<"Orders", 'Decimal'>
+  readonly amount: Prisma.FieldRef<"Orders", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"Orders", 'DateTime'>
 }
     

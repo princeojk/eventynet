@@ -41,6 +41,7 @@ model Orders {
   userId Int 
   side String
   price Decimal
+  amount Decimal
   createdAt DateTime
 }
 

@@ -9,10 +9,10 @@ export class AuthService {
     return { msg: ' I have signed in  ' };
   }
 
-  async signup(dto: AuthDto) {
+  async signup(dto: AuthDto, request: string) {
     const user = await this.prisma.user.create({
       data: {
-        uid: dto.uid,
+        uid: request,
         email: dto.email,
         name: dto.name,
         lastLogin: new Date(),

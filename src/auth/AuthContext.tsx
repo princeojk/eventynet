@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser({
-          id: user.uid,
+          uid: user.uid,
           displayName: user.displayName,
           email: user.email,
         });

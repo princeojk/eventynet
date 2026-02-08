@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-
+import { OrdersDto } from './dto';
+import { OrdersRepository } from './orders.repository';
 @Injectable({})
 export class OrdersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private orders: OrdersRepository) {}
 
-  placeOrder(req: string) {
-    console.log(req);
-    // return user;
+  async placeOrder(userUid: string, body: OrdersDto) {
+    await this.orders.setOrder(userUid, body);
+    return { success: true, message: 'Order placed', userUid };
   }
 }

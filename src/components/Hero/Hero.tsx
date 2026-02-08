@@ -8,13 +8,13 @@ import ProtectedRoute from "../../ProtectedRoute";
 
 const binaryEvent: Event[] = [
   {
-    id: "btc-100k-dec",
+    id: 1,
     question: "Will BTC hit $100k by Dec 31?",
     closesAt: "2025-12-31T23:59:59Z",
     status: "CLOSED",
     eventOptions: [
       {
-        id: "opt-1",
+        id: 1,
         yesPrice: 62,
         noPrice: 38,
       },
@@ -23,13 +23,13 @@ const binaryEvent: Event[] = [
     imageUrl: winner,
   },
   {
-    id: "ny-governor-2026",
+    id: 1,
     question: "Who will be the next governor of New York?",
     closesAt: "2026-11-03T23:59:59Z",
     status: "OPEN",
     eventOptions: [
       {
-        id: "cand-a",
+        id: 1,
         yesPrice: 60,
         noPrice: 40,
       },
@@ -38,13 +38,13 @@ const binaryEvent: Event[] = [
     imageUrl: "https://example.com/governor.jpg",
   },
   {
-    id: "btc-100k-dec",
+    id: 1,
     question: "Will BTC hit $100k by Dec 31?",
     closesAt: "2025-12-31T23:59:59Z",
     status: "OPEN",
     eventOptions: [
       {
-        id: "opt-1",
+        id: 1,
         yesPrice: 62,
         noPrice: 38,
       },
@@ -53,13 +53,13 @@ const binaryEvent: Event[] = [
     imageUrl: winner,
   },
   {
-    id: "ny-governor-2026",
+    id: 1,
     question: "Who will be the next governor of New York?",
     closesAt: "2026-11-03T23:59:59Z",
     status: "OPEN",
     eventOptions: [
       {
-        id: "cand-a",
+        id: 1,
         yesPrice: 60,
         noPrice: 40,
       },
@@ -68,13 +68,13 @@ const binaryEvent: Event[] = [
     imageUrl: "https://example.com/governor.jpg",
   },
   {
-    id: "btc-100k-dec",
+    id: 1,
     question: "Will BTC hit $100k by Dec 31?",
     closesAt: "2025-12-31T23:59:59Z",
     status: "OPEN",
     eventOptions: [
       {
-        id: "opt-1",
+        id: 1,
         yesPrice: 62,
         noPrice: 38,
       },
@@ -83,13 +83,13 @@ const binaryEvent: Event[] = [
     imageUrl: winner,
   },
   {
-    id: "ny-governor-2026",
+    id: 1,
     question: "Who will be the next governor of New York?",
     closesAt: "2026-11-03T23:59:59Z",
     status: "OPEN",
     eventOptions: [
       {
-        id: "cand-a",
+        id: 1,
         yesPrice: 60,
         noPrice: 40,
       },

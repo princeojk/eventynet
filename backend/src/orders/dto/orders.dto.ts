@@ -1,6 +1,15 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class OrdersDto {
+  @IsNumber()
+  eventId: number;
+
   @IsString()
-  token: string;
+  side: string;
+
+  @IsNumber()
+  price: number;
+
+  @IsNumber()
+  amount: number;
 }

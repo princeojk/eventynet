@@ -21,7 +21,7 @@ export interface Event {
 }
 
 export interface User {
-  id: number;
+  uid: string;
   displayName: string | null;
   email: string | null;
   imageUrl?: string;

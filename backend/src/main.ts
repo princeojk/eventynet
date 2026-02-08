@@ -23,6 +23,11 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
+      transform: true,
+      exceptionFactory: (errors) => {
+        console.error('❌ VALIDATION FAILED:', JSON.stringify(errors, null, 2));
+        return errors;
+      },
     }),
   );
 
