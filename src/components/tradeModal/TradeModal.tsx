@@ -6,6 +6,8 @@ import Input from "../Input/Input";
 import { payoutReducer } from "./tradeModal.reducer";
 import AccountBalance from "../AccountBalance/AccountBalance";
 import DepositModal from "../../depositModal/DepositModal";
+import { placetrade } from "../../api/placeTrade";
+import { useAuth } from "../../auth/authContextHook";
 
 interface modalProps {
   event: Event;
@@ -23,9 +25,10 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
     price: price,
   });
   const [tradeModal, setTradeModal] = useState(false);
+  const { token } = useAuth();
 
   const handleTrade = () => {
-    console.log("trade handled");
+    placetrade(event.id, side, price, state.inputPayload, token);
   };
 
   const openDepositModal = (e: boolean) => {
@@ -84,6 +87,7 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
             inputSize={10}
             containerSize="small"
             color="black"
+            placeholder="trade amount"
             layout="horizontal"
             onChange={(e) => {
               dispatch({

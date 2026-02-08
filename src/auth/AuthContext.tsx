@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     });
     return unsubscribe;
-  }, [user]);
+  }, []);
 
   const logout = () => {
     signOut(auth);

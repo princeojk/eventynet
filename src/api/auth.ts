@@ -7,10 +7,8 @@ export const saveUser = async (
   token: string,
 ) => {
   const url = import.meta.env.VITE_PUBLIC_BASE_URL + "v1/auth/signup";
-  const uid = user.uid;
 
   const body = {
-    uid: uid,
     name: name,
     email: email,
   };

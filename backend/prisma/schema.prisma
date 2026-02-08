@@ -22,3 +22,31 @@ model User {
   createdAt DateTime @default(now())
   lastLogin DateTime
 }
+
+model Event {
+  id Int @id @default(autoincrement())
+  question String
+  closesAt DateTime
+  status Int
+  amountTraded Decimal
+  totalTraded Int
+  outCome Int
+  yesPrice Decimal
+  noPrice Decimal
+}
+
+model Orders {
+  id Int @id @default(autoincrement()) 
+  eventId Int
+  userId Int 
+  side String
+  price Decimal
+  createdAt DateTime
+}
+
+model Balance {
+  id Int @id @default(autoincrement()) 
+  balance Decimal
+  lockedBalance Decimal
+  updatedAt DateTime
+}

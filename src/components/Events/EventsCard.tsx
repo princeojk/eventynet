@@ -16,7 +16,7 @@ const EventsCard: React.FC<EventsCardProps> = ({
   onOpenModal,
 }) => {
   const [, setSide] = useState<Side | null>(null);
-  const [, setIsModalOpen] = useState(false);
+  // const [, setIsModalOpen] = useState(false);
   const isActive = event.status === "OPEN";
 
   return (
@@ -38,7 +38,7 @@ const EventsCard: React.FC<EventsCardProps> = ({
                   color="green"
                   onClick={() => {
                     setSide("YES");
-                    setIsModalOpen(true);
+                    // setIsModalOpen(true);
                     onOpenModal(event, option, "YES");
                   }}
                   disabled={!isActive}
@@ -53,7 +53,7 @@ const EventsCard: React.FC<EventsCardProps> = ({
                   color="pink"
                   onClick={() => {
                     setSide("NO");
-                    setIsModalOpen(true);
+                    // setIsModalOpen(true);
                     onOpenModal(event, option, "NO");
                   }}
                   disabled={!isActive}

@@ -17,7 +17,7 @@ export class AuthenticationGuard implements CanActivate {
 
     try {
       const decodedToken = await admin.auth().verifyIdToken(token);
-      request['user'] = decodedToken;
+      request['userUid'] = decodedToken.uid;
 
       return true;
     } catch (error) {

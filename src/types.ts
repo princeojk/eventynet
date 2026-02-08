@@ -3,14 +3,14 @@ export type Side = "YES" | "NO";
 type MarketStatus = "OPEN" | "CLOSED";
 
 export interface EventOptions {
-  id: string;
+  id: number;
   title?: string;
   yesPrice: number;
   noPrice: number;
 }
 
 export interface Event {
-  id: string;
+  id: number;
   question: string;
   closesAt: string;
   status: MarketStatus;
@@ -21,7 +21,7 @@ export interface Event {
 }
 
 export interface User {
-  id: string;
+  id: number;
   displayName: string | null;
   email: string | null;
   imageUrl?: string;

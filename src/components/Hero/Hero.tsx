@@ -4,6 +4,7 @@ import type { Event, EventOptions, Side } from "../../types";
 import EventList from "../EventsList/EventsList";
 import { useState } from "react";
 import TradeModal from "../tradeModal/TradeModal";
+import ProtectedRoute from "../../ProtectedRoute";
 
 const binaryEvent: Event[] = [
   {
@@ -120,12 +121,14 @@ function Hero() {
           <EventList events={binaryEvent} onOpenModal={openTradeModal} />
         </div>
         {modalData.event && modalData.side && modalData.option && (
-          <TradeModal
-            event={modalData.event}
-            side={modalData.side}
-            option={modalData.option}
-            onClose={closeTradeModal}
-          />
+          <ProtectedRoute>
+            <TradeModal
+              event={modalData.event}
+              side={modalData.side}
+              option={modalData.option}
+              onClose={closeTradeModal}
+            />
+          </ProtectedRoute>
         )}
       </div>
     </>

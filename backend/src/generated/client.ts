@@ -47,3 +47,18 @@ path.join(process.cwd(), "src/generated/libquery_engine-darwin-arm64.dylib.node"
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
+ * Model Orders
+ * 
+ */
+export type Orders = Prisma.OrdersModel
+/**
+ * Model Balance
+ * 
+ */
+export type Balance = Prisma.BalanceModel
