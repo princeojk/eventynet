@@ -24,4 +24,29 @@ export class BalanceRepository {
 
     return balance;
   }
+
+  async updateBalance(
+    userId: number,
+    amount: number,
+    lockedBalance: number = 0,
+  ) {
+    const balance = await this.prisma.balance.upsert({
+      where: {
+        userId: userId,
+      },
+      update: {
+        balance: amount,
+        lockedBalance: lockedBalance,
+        updatedAt: new Date(),
+      },
+      create: {
+        userId: userId,
+        balance: amount,
+        lockedBalance: lockedBalance,
+        updatedAt: new Date(),
+      },
+    });
+
+    return balance;
+  }
 }

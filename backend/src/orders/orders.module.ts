@@ -4,7 +4,6 @@ import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { UserRepository } from 'src/user/user.repository';
 import { OrdersRepository } from './orders.repository';
-// import { UserRepository } from 'src/user/user.repository';
 
 @Module({
   imports: [PrismaModule],

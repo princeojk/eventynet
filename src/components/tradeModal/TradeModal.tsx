@@ -24,9 +24,18 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
     price: price,
   });
   const [tradeModal, setTradeModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleTrade = () => {
-    placetrade(event.id, side, price, state.inputPayload);
+    try {
+      setLoading(true);
+      placetrade(event.id, side, price, state.inputPayload);
+    } catch {
+      console.error("unable to place trade");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const openDepositModal = (e: boolean) => {
@@ -107,7 +116,9 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
           <AccountBalance onOpenModel={openDepositModal} />
         </div>
         <div className={css.actions}>
-          <Button onClick={handleTrade}>Trade</Button>
+          <Button onClick={handleTrade} disabled={loading}>
+            {loading ? "saving..." : "Trade"}
+          </Button>
           <Button onClick={onClose}>Cancel</Button>
         </div>
       </div>

@@ -10,16 +10,10 @@ export class OrdersRepository {
     private prisma: PrismaService,
   ) {}
 
-  async setOrder(userUid: string, body: OrdersDto) {
-    const user = await this.user.findByUid(userUid);
-
-    if (!user) {
-      return;
-    }
-
+  async setOrder(userId: number, body: OrdersDto) {
     const order = await this.prisma.orders.create({
       data: {
-        userId: user.id,
+        userId: userId,
         eventId: body.eventId,
         side: body.side,
         price: body.price,
@@ -28,6 +22,6 @@ export class OrdersRepository {
       },
     });
 
-    return order.userId;
+    return order;
   }
 }
