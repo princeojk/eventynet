@@ -21,16 +21,16 @@ export class AuthenticationGuard implements CanActivate {
       return true;
     } catch (error) {
       const err = error as { code?: string };
-      console.error('❌ AuthGuard: Token verification failed:', err);
+      console.error('AuthGuard: Token verification failed:', err);
       switch (err.code) {
         case 'auth/id-token-expired':
-          console.error('❌ AuthGuard: Token has expired.');
+          console.error('AuthGuard: Token has expired.');
           break;
         case 'auth/invalid-id-token':
-          console.error('❌ AuthGuard: Invalid ID token provided.');
+          console.error('AuthGuard: Invalid ID token provided.');
           break;
         default:
-          console.error('❌ AuthGuard: Error verifying token:', err);
+          console.error('AuthGuard: Error verifying token:', err);
       }
 
       return false;

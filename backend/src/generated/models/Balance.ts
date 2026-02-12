@@ -28,18 +28,21 @@ export type AggregateBalance = {
 
 export type BalanceAvgAggregateOutputType = {
   id: number | null
+  userId: number | null
   balance: runtime.Decimal | null
   lockedBalance: runtime.Decimal | null
 }
 
 export type BalanceSumAggregateOutputType = {
   id: number | null
+  userId: number | null
   balance: runtime.Decimal | null
   lockedBalance: runtime.Decimal | null
 }
 
 export type BalanceMinAggregateOutputType = {
   id: number | null
+  userId: number | null
   balance: runtime.Decimal | null
   lockedBalance: runtime.Decimal | null
   updatedAt: Date | null
@@ -47,6 +50,7 @@ export type BalanceMinAggregateOutputType = {
 
 export type BalanceMaxAggregateOutputType = {
   id: number | null
+  userId: number | null
   balance: runtime.Decimal | null
   lockedBalance: runtime.Decimal | null
   updatedAt: Date | null
@@ -54,6 +58,7 @@ export type BalanceMaxAggregateOutputType = {
 
 export type BalanceCountAggregateOutputType = {
   id: number
+  userId: number
   balance: number
   lockedBalance: number
   updatedAt: number
@@ -63,18 +68,21 @@ export type BalanceCountAggregateOutputType = {
 
 export type BalanceAvgAggregateInputType = {
   id?: true
+  userId?: true
   balance?: true
   lockedBalance?: true
 }
 
 export type BalanceSumAggregateInputType = {
   id?: true
+  userId?: true
   balance?: true
   lockedBalance?: true
 }
 
 export type BalanceMinAggregateInputType = {
   id?: true
+  userId?: true
   balance?: true
   lockedBalance?: true
   updatedAt?: true
@@ -82,6 +90,7 @@ export type BalanceMinAggregateInputType = {
 
 export type BalanceMaxAggregateInputType = {
   id?: true
+  userId?: true
   balance?: true
   lockedBalance?: true
   updatedAt?: true
@@ -89,6 +98,7 @@ export type BalanceMaxAggregateInputType = {
 
 export type BalanceCountAggregateInputType = {
   id?: true
+  userId?: true
   balance?: true
   lockedBalance?: true
   updatedAt?: true
@@ -183,6 +193,7 @@ export type BalanceGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type BalanceGroupByOutputType = {
   id: number
+  userId: number
   balance: runtime.Decimal
   lockedBalance: runtime.Decimal
   updatedAt: Date
@@ -213,6 +224,7 @@ export type BalanceWhereInput = {
   OR?: Prisma.BalanceWhereInput[]
   NOT?: Prisma.BalanceWhereInput | Prisma.BalanceWhereInput[]
   id?: Prisma.IntFilter<"Balance"> | number
+  userId?: Prisma.IntFilter<"Balance"> | number
   balance?: Prisma.DecimalFilter<"Balance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance?: Prisma.DecimalFilter<"Balance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt?: Prisma.DateTimeFilter<"Balance"> | Date | string
@@ -220,6 +232,7 @@ export type BalanceWhereInput = {
 
 export type BalanceOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   lockedBalance?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -227,16 +240,18 @@ export type BalanceOrderByWithRelationInput = {
 
 export type BalanceWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  userId?: number
   AND?: Prisma.BalanceWhereInput | Prisma.BalanceWhereInput[]
   OR?: Prisma.BalanceWhereInput[]
   NOT?: Prisma.BalanceWhereInput | Prisma.BalanceWhereInput[]
   balance?: Prisma.DecimalFilter<"Balance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance?: Prisma.DecimalFilter<"Balance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt?: Prisma.DateTimeFilter<"Balance"> | Date | string
-}, "id">
+}, "id" | "userId">
 
 export type BalanceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   lockedBalance?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -252,12 +267,14 @@ export type BalanceScalarWhereWithAggregatesInput = {
   OR?: Prisma.BalanceScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BalanceScalarWhereWithAggregatesInput | Prisma.BalanceScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Balance"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"Balance"> | number
   balance?: Prisma.DecimalWithAggregatesFilter<"Balance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance?: Prisma.DecimalWithAggregatesFilter<"Balance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Balance"> | Date | string
 }
 
 export type BalanceCreateInput = {
+  userId: number
   balance: runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance: runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt: Date | string
@@ -265,12 +282,14 @@ export type BalanceCreateInput = {
 
 export type BalanceUncheckedCreateInput = {
   id?: number
+  userId: number
   balance: runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance: runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt: Date | string
 }
 
 export type BalanceUpdateInput = {
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -278,6 +297,7 @@ export type BalanceUpdateInput = {
 
 export type BalanceUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -285,12 +305,14 @@ export type BalanceUncheckedUpdateInput = {
 
 export type BalanceCreateManyInput = {
   id?: number
+  userId: number
   balance: runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance: runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt: Date | string
 }
 
 export type BalanceUpdateManyMutationInput = {
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -298,6 +320,7 @@ export type BalanceUpdateManyMutationInput = {
 
 export type BalanceUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   lockedBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -305,6 +328,7 @@ export type BalanceUncheckedUpdateManyInput = {
 
 export type BalanceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   lockedBalance?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -312,12 +336,14 @@ export type BalanceCountOrderByAggregateInput = {
 
 export type BalanceAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   lockedBalance?: Prisma.SortOrder
 }
 
 export type BalanceMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   lockedBalance?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -325,6 +351,7 @@ export type BalanceMaxOrderByAggregateInput = {
 
 export type BalanceMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   lockedBalance?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -332,6 +359,7 @@ export type BalanceMinOrderByAggregateInput = {
 
 export type BalanceSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   lockedBalance?: Prisma.SortOrder
 }
@@ -340,6 +368,7 @@ export type BalanceSumOrderByAggregateInput = {
 
 export type BalanceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
   balance?: boolean
   lockedBalance?: boolean
   updatedAt?: boolean
@@ -349,18 +378,20 @@ export type BalanceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type BalanceSelectScalar = {
   id?: boolean
+  userId?: boolean
   balance?: boolean
   lockedBalance?: boolean
   updatedAt?: boolean
 }
 
-export type BalanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "balance" | "lockedBalance" | "updatedAt", ExtArgs["result"]["balance"]>
+export type BalanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "balance" | "lockedBalance" | "updatedAt", ExtArgs["result"]["balance"]>
 
 export type $BalancePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Balance"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    userId: number
     balance: runtime.Decimal
     lockedBalance: runtime.Decimal
     updatedAt: Date
@@ -734,6 +765,7 @@ export interface Prisma__BalanceClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface BalanceFieldRefs {
   readonly id: Prisma.FieldRef<"Balance", 'Int'>
+  readonly userId: Prisma.FieldRef<"Balance", 'Int'>
   readonly balance: Prisma.FieldRef<"Balance", 'Decimal'>
   readonly lockedBalance: Prisma.FieldRef<"Balance", 'Decimal'>
   readonly updatedAt: Prisma.FieldRef<"Balance", 'DateTime'>

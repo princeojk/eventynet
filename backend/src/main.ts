@@ -25,7 +25,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
       exceptionFactory: (errors) => {
-        console.error('❌ VALIDATION FAILED:', JSON.stringify(errors, null, 2));
+        console.error('tk VALIDATION FAILED:', JSON.stringify(errors, null, 2));
         return errors;
       },
     }),

@@ -758,6 +758,7 @@ export type OrdersScalarFieldEnum = (typeof OrdersScalarFieldEnum)[keyof typeof 
 
 export const BalanceScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   balance: 'balance',
   lockedBalance: 'lockedBalance',
   updatedAt: 'updatedAt'

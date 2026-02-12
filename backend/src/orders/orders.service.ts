@@ -6,7 +6,7 @@ export class OrdersService {
   constructor(private orders: OrdersRepository) {}
 
   async placeOrder(userUid: string, body: OrdersDto) {
-    await this.orders.setOrder(userUid, body);
-    return { success: true, message: 'Order placed', userUid };
+    const userId = await this.orders.setOrder(userUid, body);
+    return { success: true, message: 'Order placed', userId: userId };
   }
 }

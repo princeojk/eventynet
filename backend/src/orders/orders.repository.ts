@@ -27,5 +27,7 @@ export class OrdersRepository {
         createdAt: new Date(),
       },
     });
+
+    return order.userId;
   }
 }

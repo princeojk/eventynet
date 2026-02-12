@@ -47,6 +47,7 @@ model Orders {
 
 model Balance {
   id Int @id @default(autoincrement()) 
+  userId Int @unique
   balance Decimal
   lockedBalance Decimal
   updatedAt DateTime
