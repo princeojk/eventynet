@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from 'src/prisma/prisma.module';
-
-import { UserRepository } from 'src/user/user.repository';
 import { BalanceService } from './balance.service';
+import { BalanceRepository } from './balance.repository';
+import { UserRepository } from 'src/user/user.repository';
 
 @Module({
   imports: [PrismaModule],
-  //   controllers: [OrdersController],
-  providers: [BalanceService, UserRepository],
+  // controllers: [BalanceController],
+  providers: [BalanceService, BalanceRepository, UserRepository],
+  // exports: [BalanceRepository],
 })
-export class OrdersModule {}
+export class BalanceModule {}

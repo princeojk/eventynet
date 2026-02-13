@@ -13,7 +13,7 @@ export const placetrade = async (
     eventId: eventId,
     side: side,
     price: price,
-    amount,
+    amount: amount,
   };
 
   const res = await fetch(url, {
@@ -26,6 +26,6 @@ export const placetrade = async (
   });
 
   if (res.ok) {
-    console.log(res);
+    const body = await res.json();
   }
 };

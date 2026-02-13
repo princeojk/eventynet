@@ -4,10 +4,18 @@ import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { UserRepository } from 'src/user/user.repository';
 import { OrdersRepository } from './orders.repository';
+import { BalanceService } from 'src/balance/balance.service';
+import { BalanceRepository } from 'src/balance/balance.repository';
 
 @Module({
   imports: [PrismaModule],
   controllers: [OrdersController],
-  providers: [OrdersService, UserRepository, OrdersRepository],
+  providers: [
+    BalanceService,
+    UserRepository,
+    OrdersRepository,
+    BalanceRepository,
+    OrdersService,
+  ],
 })
 export class OrdersModule {}

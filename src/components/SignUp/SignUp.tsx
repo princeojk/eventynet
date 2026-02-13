@@ -58,7 +58,6 @@ const Signup = () => {
     if (!user) {
       return;
     }
-
     await saveUser(user, name, email);
   };
 

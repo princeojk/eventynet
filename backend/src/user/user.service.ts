@@ -1,20 +1,21 @@
-// import { Injectable } from '@nestjs/common';
-// import { PrismaService } from 'src/prisma/prisma.service';
-// import { AuthDto } from './dto';
+import { Injectable } from '@nestjs/common';
+import { AuthDto } from 'src/auth/dto';
+import { PrismaClient } from 'src/generated/client';
 
-// @Injectable({})
-// export class UserService {
-//   constructor(private prisma: PrismaService) {}
+@Injectable({})
+export class UserService {
+  constructor() {}
 
-//   async signup(dto: AuthDto) {
-//     const user = await this.prisma.user.create({
-//       data: {
-//         uid: dto.uid,
-//         email: dto.email,
-//         name: dto.name,
-//         lastLogin: new Date(),
-//       },
-//     });
-//     return user;
-//   }
-// }
+  async createUser(tx: PrismaClient, dto: AuthDto, uid: string) {
+    const res = await tx.user.create({
+      data: {
+        uid: uid,
+        email: dto.email,
+        name: dto.name,
+        lastLogin: new Date(),
+      },
+    });
+
+    return res;
+  }
+}

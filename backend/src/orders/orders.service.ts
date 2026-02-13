@@ -19,7 +19,21 @@ export class OrdersService {
       return;
     }
 
-    const balance = await this.balance.getUserBalanceAmount(user.id);
+    const canOrder = await this.canPlaceOrder(user.id, body.amount);
+
+    if (!canOrder) {
+      return {
+        success: false,
+        message: 'Insufficient balance',
+      };
+    }
+
+    await this.orders.setOrder(user.id, body);
+    return { success: true, message: 'Order placed' };
+  }
+
+  private async canPlaceOrder(userId: number, amount: number) {
+    const balance = await this.balance.getUserBalanceAmount(userId);
 
     if (!balance) {
       console.error('user balance not found');
@@ -27,19 +41,14 @@ export class OrdersService {
     }
 
     const canPlaceOrder = this.balance.isEnoughBalance(
-      body.amount,
+      amount,
       balance.toNumber(),
     );
 
     if (!canPlaceOrder) {
-      return {
-        success: false,
-        message: 'Unable to place oder',
-        userId: user.id,
-      };
+      return false;
     }
 
-    const userId = await this.orders.setOrder(user.id, body);
-    return { success: true, message: 'Order placed', userId: userId };
+    return true;
   }
 }

@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaClient } from 'src/generated/client';
+import { Balance } from 'src/generated/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserRepository } from 'src/user/user.repository';
 
@@ -25,12 +27,23 @@ export class BalanceRepository {
     return balance;
   }
 
+  async findById(userId: number) {
+    const balance = await this.prisma.balance.findUnique({
+      where: {
+        userId: userId,
+      },
+    });
+
+    return balance;
+  }
+
   async updateBalance(
+    tx: PrismaClient,
     userId: number,
     amount: number,
     lockedBalance: number = 0,
-  ) {
-    const balance = await this.prisma.balance.upsert({
+  ): Promise<Balance> {
+    const res = await tx.balance.upsert({
       where: {
         userId: userId,
       },
@@ -47,6 +60,6 @@ export class BalanceRepository {
       },
     });
 
-    return balance;
+    return res;
   }
 }
