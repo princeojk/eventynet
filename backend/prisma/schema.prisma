@@ -25,7 +25,7 @@ model User {
 
 model Event {
   id Int @id @default(autoincrement())
-  question String
+  question String @unique
   closesAt DateTime
   status Int
   amountTraded Decimal
@@ -33,6 +33,9 @@ model Event {
   outCome Int
   yesPrice Decimal
   noPrice Decimal
+  liquidityParameter Int @default(50)
+  yesShares Int @default(0)
+  noShares Int @default(0)
 }
 
 model Orders {

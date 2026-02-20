@@ -3,11 +3,13 @@ import { OrdersDto } from './dto';
 import { OrdersRepository } from './orders.repository';
 import { BalanceService } from 'src/balance/balance.service';
 import { UserRepository } from 'src/user/user.repository';
+import { BalanceRepository } from 'src/balance/balance.repository';
 @Injectable({})
 export class OrdersService {
   constructor(
     private orders: OrdersRepository,
     private balance: BalanceService,
+    private balanceRepo: BalanceRepository,
     private user: UserRepository,
   ) {}
 
@@ -29,6 +31,14 @@ export class OrdersService {
     }
 
     await this.orders.setOrder(user.id, body);
+
+    const userBalance = await this.balance.getUserBalanceAmount(user.id);
+
+    if (userBalance) {
+      const newBalance = Number(userBalance) - body.amount;
+      await this.balanceRepo.updateBalance(user.id, newBalance);
+    }
+
     return { success: true, message: 'Order placed' };
   }
 

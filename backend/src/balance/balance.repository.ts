@@ -37,22 +37,14 @@ export class BalanceRepository {
     return balance;
   }
 
-  async updateBalance(
+  async createBalance(
     tx: PrismaClient,
     userId: number,
     amount: number,
     lockedBalance: number = 0,
   ): Promise<Balance> {
-    const res = await tx.balance.upsert({
-      where: {
-        userId: userId,
-      },
-      update: {
-        balance: amount,
-        lockedBalance: lockedBalance,
-        updatedAt: new Date(),
-      },
-      create: {
+    const res = await tx.balance.create({
+      data: {
         userId: userId,
         balance: amount,
         lockedBalance: lockedBalance,
@@ -61,5 +53,23 @@ export class BalanceRepository {
     });
 
     return res;
+  }
+
+  async updateBalance(
+    userId: number,
+    amount: number,
+    lockedBalance: number = 0,
+  ) {
+    const updatedBalance = await this.prisma.balance.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        balance: amount,
+        lockedBalance: lockedBalance,
+        updatedAt: new Date(),
+      },
+    });
+    return updatedBalance;
   }
 }

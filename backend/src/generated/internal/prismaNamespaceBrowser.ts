@@ -92,7 +92,10 @@ export const EventScalarFieldEnum = {
   totalTraded: 'totalTraded',
   outCome: 'outCome',
   yesPrice: 'yesPrice',
-  noPrice: 'noPrice'
+  noPrice: 'noPrice',
+  liquidityParameter: 'liquidityParameter',
+  yesShares: 'yesShares',
+  noShares: 'noShares'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]

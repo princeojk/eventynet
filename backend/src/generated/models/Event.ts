@@ -34,6 +34,9 @@ export type EventAvgAggregateOutputType = {
   outCome: number | null
   yesPrice: runtime.Decimal | null
   noPrice: runtime.Decimal | null
+  liquidityParameter: number | null
+  yesShares: number | null
+  noShares: number | null
 }
 
 export type EventSumAggregateOutputType = {
@@ -44,6 +47,9 @@ export type EventSumAggregateOutputType = {
   outCome: number | null
   yesPrice: runtime.Decimal | null
   noPrice: runtime.Decimal | null
+  liquidityParameter: number | null
+  yesShares: number | null
+  noShares: number | null
 }
 
 export type EventMinAggregateOutputType = {
@@ -56,6 +62,9 @@ export type EventMinAggregateOutputType = {
   outCome: number | null
   yesPrice: runtime.Decimal | null
   noPrice: runtime.Decimal | null
+  liquidityParameter: number | null
+  yesShares: number | null
+  noShares: number | null
 }
 
 export type EventMaxAggregateOutputType = {
@@ -68,6 +77,9 @@ export type EventMaxAggregateOutputType = {
   outCome: number | null
   yesPrice: runtime.Decimal | null
   noPrice: runtime.Decimal | null
+  liquidityParameter: number | null
+  yesShares: number | null
+  noShares: number | null
 }
 
 export type EventCountAggregateOutputType = {
@@ -80,6 +92,9 @@ export type EventCountAggregateOutputType = {
   outCome: number
   yesPrice: number
   noPrice: number
+  liquidityParameter: number
+  yesShares: number
+  noShares: number
   _all: number
 }
 
@@ -92,6 +107,9 @@ export type EventAvgAggregateInputType = {
   outCome?: true
   yesPrice?: true
   noPrice?: true
+  liquidityParameter?: true
+  yesShares?: true
+  noShares?: true
 }
 
 export type EventSumAggregateInputType = {
@@ -102,6 +120,9 @@ export type EventSumAggregateInputType = {
   outCome?: true
   yesPrice?: true
   noPrice?: true
+  liquidityParameter?: true
+  yesShares?: true
+  noShares?: true
 }
 
 export type EventMinAggregateInputType = {
@@ -114,6 +135,9 @@ export type EventMinAggregateInputType = {
   outCome?: true
   yesPrice?: true
   noPrice?: true
+  liquidityParameter?: true
+  yesShares?: true
+  noShares?: true
 }
 
 export type EventMaxAggregateInputType = {
@@ -126,6 +150,9 @@ export type EventMaxAggregateInputType = {
   outCome?: true
   yesPrice?: true
   noPrice?: true
+  liquidityParameter?: true
+  yesShares?: true
+  noShares?: true
 }
 
 export type EventCountAggregateInputType = {
@@ -138,6 +165,9 @@ export type EventCountAggregateInputType = {
   outCome?: true
   yesPrice?: true
   noPrice?: true
+  liquidityParameter?: true
+  yesShares?: true
+  noShares?: true
   _all?: true
 }
 
@@ -237,6 +267,9 @@ export type EventGroupByOutputType = {
   outCome: number
   yesPrice: runtime.Decimal
   noPrice: runtime.Decimal
+  liquidityParameter: number
+  yesShares: number
+  noShares: number
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
   _sum: EventSumAggregateOutputType | null
@@ -272,6 +305,9 @@ export type EventWhereInput = {
   outCome?: Prisma.IntFilter<"Event"> | number
   yesPrice?: Prisma.DecimalFilter<"Event"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice?: Prisma.DecimalFilter<"Event"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: Prisma.IntFilter<"Event"> | number
+  yesShares?: Prisma.IntFilter<"Event"> | number
+  noShares?: Prisma.IntFilter<"Event"> | number
 }
 
 export type EventOrderByWithRelationInput = {
@@ -284,15 +320,18 @@ export type EventOrderByWithRelationInput = {
   outCome?: Prisma.SortOrder
   yesPrice?: Prisma.SortOrder
   noPrice?: Prisma.SortOrder
+  liquidityParameter?: Prisma.SortOrder
+  yesShares?: Prisma.SortOrder
+  noShares?: Prisma.SortOrder
   _relevance?: Prisma.EventOrderByRelevanceInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  question?: string
   AND?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   OR?: Prisma.EventWhereInput[]
   NOT?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
-  question?: Prisma.StringFilter<"Event"> | string
   closesAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   status?: Prisma.IntFilter<"Event"> | number
   amountTraded?: Prisma.DecimalFilter<"Event"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -300,7 +339,10 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   outCome?: Prisma.IntFilter<"Event"> | number
   yesPrice?: Prisma.DecimalFilter<"Event"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice?: Prisma.DecimalFilter<"Event"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-}, "id">
+  liquidityParameter?: Prisma.IntFilter<"Event"> | number
+  yesShares?: Prisma.IntFilter<"Event"> | number
+  noShares?: Prisma.IntFilter<"Event"> | number
+}, "id" | "question">
 
 export type EventOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -312,6 +354,9 @@ export type EventOrderByWithAggregationInput = {
   outCome?: Prisma.SortOrder
   yesPrice?: Prisma.SortOrder
   noPrice?: Prisma.SortOrder
+  liquidityParameter?: Prisma.SortOrder
+  yesShares?: Prisma.SortOrder
+  noShares?: Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
   _max?: Prisma.EventMaxOrderByAggregateInput
@@ -332,6 +377,9 @@ export type EventScalarWhereWithAggregatesInput = {
   outCome?: Prisma.IntWithAggregatesFilter<"Event"> | number
   yesPrice?: Prisma.DecimalWithAggregatesFilter<"Event"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice?: Prisma.DecimalWithAggregatesFilter<"Event"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: Prisma.IntWithAggregatesFilter<"Event"> | number
+  yesShares?: Prisma.IntWithAggregatesFilter<"Event"> | number
+  noShares?: Prisma.IntWithAggregatesFilter<"Event"> | number
 }
 
 export type EventCreateInput = {
@@ -343,6 +391,9 @@ export type EventCreateInput = {
   outCome: number
   yesPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: number
+  yesShares?: number
+  noShares?: number
 }
 
 export type EventUncheckedCreateInput = {
@@ -355,6 +406,9 @@ export type EventUncheckedCreateInput = {
   outCome: number
   yesPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: number
+  yesShares?: number
+  noShares?: number
 }
 
 export type EventUpdateInput = {
@@ -366,6 +420,9 @@ export type EventUpdateInput = {
   outCome?: Prisma.IntFieldUpdateOperationsInput | number
   yesPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: Prisma.IntFieldUpdateOperationsInput | number
+  yesShares?: Prisma.IntFieldUpdateOperationsInput | number
+  noShares?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type EventUncheckedUpdateInput = {
@@ -378,6 +435,9 @@ export type EventUncheckedUpdateInput = {
   outCome?: Prisma.IntFieldUpdateOperationsInput | number
   yesPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: Prisma.IntFieldUpdateOperationsInput | number
+  yesShares?: Prisma.IntFieldUpdateOperationsInput | number
+  noShares?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type EventCreateManyInput = {
@@ -390,6 +450,9 @@ export type EventCreateManyInput = {
   outCome: number
   yesPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: number
+  yesShares?: number
+  noShares?: number
 }
 
 export type EventUpdateManyMutationInput = {
@@ -401,6 +464,9 @@ export type EventUpdateManyMutationInput = {
   outCome?: Prisma.IntFieldUpdateOperationsInput | number
   yesPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: Prisma.IntFieldUpdateOperationsInput | number
+  yesShares?: Prisma.IntFieldUpdateOperationsInput | number
+  noShares?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type EventUncheckedUpdateManyInput = {
@@ -413,6 +479,9 @@ export type EventUncheckedUpdateManyInput = {
   outCome?: Prisma.IntFieldUpdateOperationsInput | number
   yesPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   noPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  liquidityParameter?: Prisma.IntFieldUpdateOperationsInput | number
+  yesShares?: Prisma.IntFieldUpdateOperationsInput | number
+  noShares?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type EventOrderByRelevanceInput = {
@@ -431,6 +500,9 @@ export type EventCountOrderByAggregateInput = {
   outCome?: Prisma.SortOrder
   yesPrice?: Prisma.SortOrder
   noPrice?: Prisma.SortOrder
+  liquidityParameter?: Prisma.SortOrder
+  yesShares?: Prisma.SortOrder
+  noShares?: Prisma.SortOrder
 }
 
 export type EventAvgOrderByAggregateInput = {
@@ -441,6 +513,9 @@ export type EventAvgOrderByAggregateInput = {
   outCome?: Prisma.SortOrder
   yesPrice?: Prisma.SortOrder
   noPrice?: Prisma.SortOrder
+  liquidityParameter?: Prisma.SortOrder
+  yesShares?: Prisma.SortOrder
+  noShares?: Prisma.SortOrder
 }
 
 export type EventMaxOrderByAggregateInput = {
@@ -453,6 +528,9 @@ export type EventMaxOrderByAggregateInput = {
   outCome?: Prisma.SortOrder
   yesPrice?: Prisma.SortOrder
   noPrice?: Prisma.SortOrder
+  liquidityParameter?: Prisma.SortOrder
+  yesShares?: Prisma.SortOrder
+  noShares?: Prisma.SortOrder
 }
 
 export type EventMinOrderByAggregateInput = {
@@ -465,6 +543,9 @@ export type EventMinOrderByAggregateInput = {
   outCome?: Prisma.SortOrder
   yesPrice?: Prisma.SortOrder
   noPrice?: Prisma.SortOrder
+  liquidityParameter?: Prisma.SortOrder
+  yesShares?: Prisma.SortOrder
+  noShares?: Prisma.SortOrder
 }
 
 export type EventSumOrderByAggregateInput = {
@@ -475,6 +556,9 @@ export type EventSumOrderByAggregateInput = {
   outCome?: Prisma.SortOrder
   yesPrice?: Prisma.SortOrder
   noPrice?: Prisma.SortOrder
+  liquidityParameter?: Prisma.SortOrder
+  yesShares?: Prisma.SortOrder
+  noShares?: Prisma.SortOrder
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -497,6 +581,9 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   outCome?: boolean
   yesPrice?: boolean
   noPrice?: boolean
+  liquidityParameter?: boolean
+  yesShares?: boolean
+  noShares?: boolean
 }, ExtArgs["result"]["event"]>
 
 
@@ -511,9 +598,12 @@ export type EventSelectScalar = {
   outCome?: boolean
   yesPrice?: boolean
   noPrice?: boolean
+  liquidityParameter?: boolean
+  yesShares?: boolean
+  noShares?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "closesAt" | "status" | "amountTraded" | "totalTraded" | "outCome" | "yesPrice" | "noPrice", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "closesAt" | "status" | "amountTraded" | "totalTraded" | "outCome" | "yesPrice" | "noPrice" | "liquidityParameter" | "yesShares" | "noShares", ExtArgs["result"]["event"]>
 
 export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Event"
@@ -528,6 +618,9 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     outCome: number
     yesPrice: runtime.Decimal
     noPrice: runtime.Decimal
+    liquidityParameter: number
+    yesShares: number
+    noShares: number
   }, ExtArgs["result"]["event"]>
   composites: {}
 }
@@ -906,6 +999,9 @@ export interface EventFieldRefs {
   readonly outCome: Prisma.FieldRef<"Event", 'Int'>
   readonly yesPrice: Prisma.FieldRef<"Event", 'Decimal'>
   readonly noPrice: Prisma.FieldRef<"Event", 'Decimal'>
+  readonly liquidityParameter: Prisma.FieldRef<"Event", 'Int'>
+  readonly yesShares: Prisma.FieldRef<"Event", 'Int'>
+  readonly noShares: Prisma.FieldRef<"Event", 'Int'>
 }
     
 

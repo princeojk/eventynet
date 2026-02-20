@@ -8,7 +8,7 @@ export class BalanceService {
 
   async createBalance(tx: PrismaClient, userId: number) {
     const startBalance = 0.0;
-    await this.balance.updateBalance(tx, userId, startBalance);
+    await this.balance.createBalance(tx, userId, startBalance);
   }
 
   isEnoughBalance(amount: number, balance: number) {
