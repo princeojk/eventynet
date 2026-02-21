@@ -37,25 +37,23 @@ export class OrdersService {
 
     const userBalance = await this.balance.getUserBalanceAmount(user.id);
 
-    if (userBalance) {
-      const newBalance = Number(userBalance) - body.amount;
-      await this.balanceRepo.updateBalance(user.id, newBalance);
+    if (!userBalance) {
+      console.error('balance not found');
     }
 
-    const event = await this.eventRepo.findById(body.eventId);
+    const newBalance = Number(userBalance) - body.amount;
+    await this.balanceRepo.updateBalance(user.id, newBalance);
+
+    let event = await this.eventRepo.findById(body.eventId);
 
     if (!event) {
       console.error('event not found');
       return;
     }
-    console.log('tk body side', body.side);
-    const lmsrCal = new LmsrCalculator(
-      this.eventRepo,
-      event,
-      body.amount,
-      body.side,
-    );
-    await lmsrCal.calculatePrice();
+
+    const lmsrCal = new LmsrCalculator(event, body.amount, body.side);
+    event = lmsrCal.calculatePrice();
+    await this.eventRepo.commit(event);
 
     return { success: true, message: 'Order placed' };
   }

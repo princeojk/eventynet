@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import EventModel from 'src/event/event.model';
-import { EventRepository } from 'src/event/event.repository';
 
 @Injectable()
 class LmsrCalculator {
@@ -8,12 +7,7 @@ class LmsrCalculator {
   private amount: number;
   private side: string;
 
-  constructor(
-    private eventRepo: EventRepository,
-    event: EventModel,
-    amount: number,
-    side: string,
-  ) {
+  constructor(event: EventModel, amount: number, side: string) {
     this.event = event;
     this.amount = amount;
     this.side = side;
@@ -35,7 +29,7 @@ class LmsrCalculator {
     return this.event;
   }
 
-  public async calculatePrice() {
+  public calculatePrice(): EventModel {
     this.calculateShares();
 
     this.event.yesPrice = this.calculateYesPrice();
@@ -43,7 +37,7 @@ class LmsrCalculator {
     this.event.noPrice = 100 - this.event.yesPrice;
 
     console.log('tk noPrice', this.event.noPrice);
-    await this.eventRepo.commit(this.event);
+    return this.event;
   }
 
   private calculateYesPrice(): number {
