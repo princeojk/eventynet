@@ -1,6 +1,7 @@
 import { outComeEnum, statusEnum } from '../eventEnums';
 
 export class EventDto {
+  id: number;
   question: string;
   closesAt: Date;
   status: statusEnum;

@@ -7,8 +7,9 @@ import { EventRepository } from './event.repository';
 export class EventService {
   constructor(private eventRepo: EventRepository) {}
 
-  async createEvent(dto: EventDto) {
+  async createEvent(dto: EventDto): Promise<EventModel> {
     const event = new EventModel(
+      dto.id,
       dto.question,
       dto.status,
       dto.amountTraded,
@@ -20,5 +21,6 @@ export class EventService {
     );
 
     await this.eventRepo.commit(event);
+    return event;
   }
 }

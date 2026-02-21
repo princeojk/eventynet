@@ -29,7 +29,7 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
   const handleTrade = () => {
     try {
       setLoading(true);
-      placetrade(event.id, side, price, state.inputPayload);
+      placetrade(event.id, state.selectedSide, price, state.inputPayload);
     } catch {
       console.error("unable to place trade");
       setLoading(false);

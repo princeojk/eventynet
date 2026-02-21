@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import EventModel from './event.model';
+import { Prisma } from 'src/generated/client';
 
 @Injectable({})
 export class EventRepository {
@@ -17,6 +18,7 @@ export class EventRepository {
       return;
     }
     return new EventModel(
+      event.id,
       event.question,
       event.status,
       Number(event.amountTraded),
@@ -25,33 +27,55 @@ export class EventRepository {
       Number(event.yesPrice),
       Number(event.noPrice),
       event.liquidityParameter,
+      Number(event.yesShares),
+      Number(event.noShares),
+      event.outCome,
     );
   }
 
-  async commit(event: EventModel): Promise<EventModel> {
-    await this.prisma.event.upsert({
-      where: { question: event.question },
-      update: {
-        status: event.status,
-        amountTraded: event.amountTraded,
-        totalTraded: event.totalTraded,
-        closesAt: event.closesAT,
-        yesPrice: event.yesPrice,
-        noPrice: event.noPrice,
-        liquidityParameter: event.liquidityParameter,
-      },
-      create: {
-        question: event.question,
-        status: event.status,
-        amountTraded: event.amountTraded,
-        totalTraded: event.totalTraded,
-        closesAt: event.closesAT,
-        yesPrice: event.yesPrice,
-        noPrice: event.noPrice,
-        liquidityParameter: event.liquidityParameter,
-        outCome: event.outCome,
-      },
+  private async lockEventRowForUpdate(
+    tx: Prisma.TransactionClient,
+    eventId: number,
+  ) {
+    await tx.$queryRaw`
+    SELECT id FROM Event WHERE id = ${BigInt(eventId)} FOR UPDATE
+  `;
+  }
+
+  async commit(event: EventModel) {
+    await this.prisma.$transaction(async (tx) => {
+      console.log('tk event', event);
+      await this.lockEventRowForUpdate(tx, event.id);
+
+      return await tx.event.upsert({
+        where: { id: event.id },
+        update: {
+          question: event.question,
+          closesAt: event.closesAt,
+          status: event.status,
+          amountTraded: event.amountTraded,
+          totalTraded: event.totalTraded,
+          outCome: event.outCome,
+          yesPrice: event.yesPrice,
+          noPrice: event.noPrice,
+          liquidityParameter: event.liquidityParameter,
+          noShares: event.noShares,
+          yesShares: event.yesShares,
+        },
+        create: {
+          question: event.question,
+          closesAt: event.closesAt,
+          status: event.status,
+          amountTraded: event.amountTraded,
+          totalTraded: event.totalTraded,
+          outCome: event.outCome,
+          yesPrice: event.yesPrice,
+          noPrice: event.noPrice,
+          liquidityParameter: event.liquidityParameter,
+          noShares: event.noShares,
+          yesShares: event.yesShares,
+        },
+      });
     });
-    return event;
   }
 }

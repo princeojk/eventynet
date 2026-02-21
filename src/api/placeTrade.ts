@@ -15,7 +15,7 @@ export const placetrade = async (
     price: price,
     amount: amount,
   };
-
+  console.log("tk frontend body side", body.side);
   const res = await fetch(url, {
     method: "POST",
     headers: new Headers({

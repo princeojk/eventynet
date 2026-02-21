@@ -62,7 +62,7 @@ export class BalanceRepository {
   ) {
     const updatedBalance = await this.prisma.balance.update({
       where: {
-        id: userId,
+        userId: userId,
       },
       data: {
         balance: amount,

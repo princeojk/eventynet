@@ -4,6 +4,8 @@ import { OrdersRepository } from './orders.repository';
 import { BalanceService } from 'src/balance/balance.service';
 import { UserRepository } from 'src/user/user.repository';
 import { BalanceRepository } from 'src/balance/balance.repository';
+import { EventRepository } from 'src/event/event.repository';
+import LmsrCalculator from 'src/lmsr/lmsr.model';
 @Injectable({})
 export class OrdersService {
   constructor(
@@ -11,6 +13,7 @@ export class OrdersService {
     private balance: BalanceService,
     private balanceRepo: BalanceRepository,
     private user: UserRepository,
+    private eventRepo: EventRepository,
   ) {}
 
   async placeOrder(userUid: string, body: OrdersDto) {
@@ -38,6 +41,21 @@ export class OrdersService {
       const newBalance = Number(userBalance) - body.amount;
       await this.balanceRepo.updateBalance(user.id, newBalance);
     }
+
+    const event = await this.eventRepo.findById(body.eventId);
+
+    if (!event) {
+      console.error('event not found');
+      return;
+    }
+    console.log('tk body side', body.side);
+    const lmsrCal = new LmsrCalculator(
+      this.eventRepo,
+      event,
+      body.amount,
+      body.side,
+    );
+    await lmsrCal.calculatePrice();
 
     return { success: true, message: 'Order placed' };
   }
