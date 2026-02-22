@@ -1,0 +1,21 @@
+.alert {
+  position: fixed;
+  top: 1.5rem;
+  right: 20px;
+  min-width: 15rem;
+  max-width: 400px;
+  padding: 1rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  z-index: 100;
+  color: white;
+}
+
+.success {
+  background-color: green;
+}
+
+.error {
+  background-color: red;
+}

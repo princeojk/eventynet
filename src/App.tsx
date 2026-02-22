@@ -7,25 +7,29 @@ import Header from "./components/header/Header";
 import { AuthProvider } from "./auth/AuthContext";
 import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./ProtectedRoute";
+import { AlertProvider } from "./components/Alerts/AlertContext";
+import Alert from "./components/Alerts/Alert";
 
 function App() {
   return (
     <AuthProvider>
-      <Header />
-
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+      <AlertProvider>
+        <Header />
+        <Alert />
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AlertProvider>
     </AuthProvider>
   );
 }

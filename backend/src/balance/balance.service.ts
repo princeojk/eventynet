@@ -16,7 +16,6 @@ export class BalanceService {
   }
 
   async getUserBalanceAmount(userId: number) {
-    console.log('tk user id', userId);
     const accountBalance = await this.balance.findById(userId);
     if (!accountBalance) {
       console.error('balance not found');

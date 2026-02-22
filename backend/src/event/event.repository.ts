@@ -44,7 +44,6 @@ export class EventRepository {
 
   async commit(event: EventModel) {
     await this.prisma.$transaction(async (tx) => {
-      console.log('tk event', event);
       await this.lockEventRowForUpdate(tx, event.id);
 
       return await tx.event.upsert({

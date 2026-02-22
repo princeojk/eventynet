@@ -18,6 +18,12 @@ export class OrdersService {
 
   async placeOrder(userUid: string, body: OrdersDto) {
     const user = await this.user.findByUid(userUid);
+    const zeroAmount = 0;
+
+    if (body.amount === zeroAmount) {
+      console.error('invalid amount');
+      return;
+    }
 
     if (!user) {
       console.error('user not found');

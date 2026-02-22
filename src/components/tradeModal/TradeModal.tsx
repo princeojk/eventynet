@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import css from "./tradeModal.module.scss";
 import type { Event, EventOptions, Side } from "../../types";
 import Button from "../Buttons/Button";
@@ -7,6 +7,7 @@ import { payoutReducer } from "./tradeModal.reducer";
 import AccountBalance from "../AccountBalance/AccountBalance";
 import DepositModal from "../../depositModal/DepositModal";
 import { placetrade } from "../../api/placeTrade";
+import AlertContext from "../Alerts/AlertContext";
 
 interface modalProps {
   event: Event;
@@ -16,6 +17,7 @@ interface modalProps {
 }
 
 const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
+  const alert = useContext(AlertContext);
   const price = side === "YES" ? option.yesPrice : option.noPrice;
   const [state, dispatch] = useReducer(payoutReducer, {
     selectedSide: side,
@@ -23,10 +25,15 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
     inputPayload: 0,
     price: price,
   });
-  const [tradeModal, setTradeModal] = useState(false);
+  const [depositModal, setDepositModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleTrade = () => {
+    if (state.inputPayload === 0) {
+      console.log("tk zero amount");
+      alert?.error("Please enter an amount to place trade", 1);
+    }
+
     try {
       setLoading(true);
       placetrade(event.id, state.selectedSide, price, state.inputPayload);
@@ -39,11 +46,11 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
   };
 
   const openDepositModal = (e: boolean) => {
-    setTradeModal(e);
+    setDepositModal(e);
   };
 
   const handleOnClose = () => {
-    setTradeModal(false);
+    setDepositModal(false);
   };
 
   return (
@@ -122,7 +129,7 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
           <Button onClick={onClose}>Cancel</Button>
         </div>
       </div>
-      {tradeModal && (
+      {depositModal && (
         <div className={css.depositModal}>
           <DepositModal onClose={handleOnClose} />
         </div>

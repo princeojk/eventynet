@@ -26,3 +26,9 @@ export interface User {
   email: string | null;
   imageUrl?: string;
 }
+
+export interface AlertStatus {
+  success: string;
+  error: string;
+  undefined: string;
+}
