@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import EventModel from './event.model';
 import { Prisma } from 'src/generated/client';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable({})
 export class EventRepository {
@@ -14,9 +15,9 @@ export class EventRepository {
       },
     });
     if (!event) {
-      console.error('event not found');
-      return;
+      throw new NotFoundException('Event not found');
     }
+
     return new EventModel(
       event.id,
       event.question,

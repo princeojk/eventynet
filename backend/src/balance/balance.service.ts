@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BalanceRepository } from './balance.repository';
 import { Balance, PrismaClient } from 'src/generated/client';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable({})
 export class BalanceService {
@@ -18,8 +19,7 @@ export class BalanceService {
   async getUserBalanceAmount(userId: number) {
     const accountBalance = await this.balance.findById(userId);
     if (!accountBalance) {
-      console.error('balance not found');
-      return;
+      throw new NotFoundException('balance not found');
     }
     return accountBalance.balance;
   }

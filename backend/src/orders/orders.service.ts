@@ -6,6 +6,7 @@ import { UserRepository } from 'src/user/user.repository';
 import { BalanceRepository } from 'src/balance/balance.repository';
 import { EventRepository } from 'src/event/event.repository';
 import LmsrCalculator from 'src/lmsr/lmsr.model';
+import { NotFoundException } from '@nestjs/common';
 @Injectable({})
 export class OrdersService {
   constructor(
@@ -21,13 +22,11 @@ export class OrdersService {
     const zeroAmount = 0;
 
     if (body.amount === zeroAmount) {
-      console.error('invalid amount');
-      return;
+      throw new NotFoundException('invalid amount');
     }
 
     if (!user) {
-      console.error('user not found');
-      return;
+      throw new NotFoundException('user not found');
     }
 
     const canOrder = await this.canPlaceOrder(user.id, body.amount);
@@ -44,7 +43,7 @@ export class OrdersService {
     const userBalance = await this.balance.getUserBalanceAmount(user.id);
 
     if (!userBalance) {
-      console.error('balance not found');
+      throw new NotFoundException('balance not found');
     }
 
     const newBalance = Number(userBalance) - body.amount;
@@ -53,8 +52,7 @@ export class OrdersService {
     let event = await this.eventRepo.findById(body.eventId);
 
     if (!event) {
-      console.error('event not found');
-      return;
+      throw new NotFoundException('event not found');
     }
 
     const lmsrCal = new LmsrCalculator(event, body.amount, body.side);
@@ -68,8 +66,7 @@ export class OrdersService {
     const balance = await this.balance.getUserBalanceAmount(userId);
 
     if (!balance) {
-      console.error('user balance not found');
-      return;
+      throw new NotFoundException('user balance not found');
     }
 
     const canPlaceOrder = this.balance.isEnoughBalance(
