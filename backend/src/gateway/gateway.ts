@@ -6,8 +6,13 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
+import { EventPriceChange } from 'src/event/dto/eventPriceChange.dto';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+  },
+})
 export class MyGateway implements OnModuleInit {
   @WebSocketServer()
   server: Server;
@@ -20,11 +25,10 @@ export class MyGateway implements OnModuleInit {
   }
 
   @SubscribeMessage('updatePrice')
-  onUpdatePrice(@MessageBody() body: any) {
+  onUpdatePrice(@MessageBody() body: EventPriceChange) {
     console.log(body);
-    this.server.emit('onMessage', {
-      msg: 'Hello haa',
-      content: body,
+    this.server.emit('onPriceChange', {
+      body,
     });
   }
 }

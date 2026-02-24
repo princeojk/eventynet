@@ -25,8 +25,6 @@ class LmsrCalculator {
       const noShares = this.amount / this.event.noPrice;
       this.event.noShares += noShares;
     }
-
-    return this.event;
   }
 
   public calculatePrice(): EventModel {

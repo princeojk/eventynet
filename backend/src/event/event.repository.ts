@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import EventModel from './event.model';
 import { Prisma } from 'src/generated/client';
 import { NotFoundException } from '@nestjs/common';
+import { statusEnum } from './eventEnums';
 
 @Injectable({})
 export class EventRepository {
@@ -32,6 +33,29 @@ export class EventRepository {
       Number(event.noShares),
       event.outCome,
     );
+  }
+
+  async findOpenEvents() {
+    const events = await this.prisma.event.findMany({
+      where: { status: statusEnum.open },
+    });
+
+    return events.map((event) => {
+      return new EventModel(
+        event.id,
+        event.question,
+        event.status,
+        Number(event.amountTraded),
+        event.totalTraded,
+        event.closesAt,
+        Number(event.yesPrice),
+        Number(event.noPrice),
+        event.liquidityParameter,
+        Number(event.yesShares),
+        Number(event.noShares),
+        event.outCome,
+      );
+    });
   }
 
   private async lockEventRowForUpdate(

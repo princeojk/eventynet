@@ -7,6 +7,8 @@ import { BalanceRepository } from 'src/balance/balance.repository';
 import { EventRepository } from 'src/event/event.repository';
 import LmsrCalculator from 'src/lmsr/lmsr.model';
 import { NotFoundException } from '@nestjs/common';
+import { MyGateway } from 'src/gateway/gateway';
+import EventModel from 'src/event/event.model';
 @Injectable({})
 export class OrdersService {
   constructor(
@@ -15,12 +17,13 @@ export class OrdersService {
     private balanceRepo: BalanceRepository,
     private user: UserRepository,
     private eventRepo: EventRepository,
+    private myGateWay: MyGateway,
   ) {}
 
   async placeOrder(userUid: string, body: OrdersDto) {
     const user = await this.user.findByUid(userUid);
     const zeroAmount = 0;
-
+    console.log('tk order user', user);
     if (body.amount === zeroAmount) {
       throw new NotFoundException('invalid amount');
     }
@@ -31,6 +34,7 @@ export class OrdersService {
 
     const canOrder = await this.canPlaceOrder(user.id, body.amount);
 
+    // add alert for frontend
     if (!canOrder) {
       return {
         success: false,
@@ -57,7 +61,8 @@ export class OrdersService {
 
     const lmsrCal = new LmsrCalculator(event, body.amount, body.side);
     event = lmsrCal.calculatePrice();
-    await this.eventRepo.commit(event);
+
+    await this.commitAndBroadcast(event);
 
     return { success: true, message: 'Order placed' };
   }
@@ -79,5 +84,17 @@ export class OrdersService {
     }
 
     return true;
+  }
+
+  async commitAndBroadcast(event: EventModel) {
+    await this.eventRepo.commit(event);
+
+    const eventBroadcast = {
+      id: event.id,
+      yesPrice: event.getYesPrice(),
+      noPrice: event.getNoPrice(),
+    };
+
+    this.myGateWay.onUpdatePrice(eventBroadcast);
   }
 }

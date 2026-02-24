@@ -42,6 +42,22 @@ class EventModel {
     this.noShares = noShares;
     this.outCome = outcome;
   }
+
+  getMarketStaus() {
+    if (this.status === statusEnum.closed) {
+      return 'CLOSED';
+    } else {
+      return 'OPEN';
+    }
+  }
+
+  getYesPrice() {
+    return Math.round(this.yesPrice);
+  }
+
+  getNoPrice() {
+    return Math.round(this.noPrice);
+  }
 }
 
 export default EventModel;

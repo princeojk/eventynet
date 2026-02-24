@@ -23,4 +23,27 @@ export class EventService {
     await this.eventRepo.commit(event);
     return event;
   }
+
+  async getOpenEvents() {
+    const results: EventModel[] = await this.eventRepo.findOpenEvents();
+
+    const events = results.map((result) => {
+      const event = {
+        id: result.id,
+        question: result.question,
+        status: result.getMarketStaus(),
+        closesAt: result.closesAt,
+        amountTraded: result.amountTraded,
+        totalTraded: result.totalTraded,
+        yesPrice: result.getYesPrice(),
+        noPrice: result.getNoPrice(),
+      };
+      return event;
+    });
+
+    return {
+      message: 'open Events',
+      events: events,
+    };
+  }
 }

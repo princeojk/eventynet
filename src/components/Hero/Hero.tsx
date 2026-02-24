@@ -1,133 +1,79 @@
-import winner from "../../assets/images/winner.jpg";
 import css from "./Hero.module.scss";
-import type { Event, EventOptions, Side } from "../../types";
+import type { Event, Side } from "../../types";
 import EventList from "../EventsList/EventsList";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TradeModal from "../tradeModal/TradeModal";
 import ProtectedRoute from "../../ProtectedRoute";
-import Alert from "../Alerts/Alert";
-
-const binaryEvent: Event[] = [
-  {
-    id: 1,
-    question: "Will BTC hit $100k by Dec 31?",
-    closesAt: "2025-12-31T23:59:59Z",
-    status: "CLOSED",
-    eventOptions: [
-      {
-        id: 1,
-        yesPrice: 62,
-        noPrice: 38,
-      },
-    ],
-    amountTraded: 1000,
-    imageUrl: winner,
-  },
-  {
-    id: 1,
-    question: "Who will be the next governor of New York?",
-    closesAt: "2026-11-03T23:59:59Z",
-    status: "OPEN",
-    eventOptions: [
-      {
-        id: 1,
-        yesPrice: 60,
-        noPrice: 40,
-      },
-    ],
-    amountTraded: 1000,
-    imageUrl: "https://example.com/governor.jpg",
-  },
-  {
-    id: 1,
-    question: "Will BTC hit $100k by Dec 31?",
-    closesAt: "2025-12-31T23:59:59Z",
-    status: "OPEN",
-    eventOptions: [
-      {
-        id: 1,
-        yesPrice: 62,
-        noPrice: 38,
-      },
-    ],
-    amountTraded: 1040,
-    imageUrl: winner,
-  },
-  {
-    id: 1,
-    question: "Who will be the next governor of New York?",
-    closesAt: "2026-11-03T23:59:59Z",
-    status: "OPEN",
-    eventOptions: [
-      {
-        id: 1,
-        yesPrice: 60,
-        noPrice: 40,
-      },
-    ],
-    amountTraded: 1500,
-    imageUrl: "https://example.com/governor.jpg",
-  },
-  {
-    id: 1,
-    question: "Will BTC hit $100k by Dec 31?",
-    closesAt: "2025-12-31T23:59:59Z",
-    status: "OPEN",
-    eventOptions: [
-      {
-        id: 1,
-        yesPrice: 62,
-        noPrice: 38,
-      },
-    ],
-    amountTraded: 2000,
-    imageUrl: winner,
-  },
-  {
-    id: 1,
-    question: "Who will be the next governor of New York?",
-    closesAt: "2026-11-03T23:59:59Z",
-    status: "OPEN",
-    eventOptions: [
-      {
-        id: 1,
-        yesPrice: 60,
-        noPrice: 40,
-      },
-    ],
-    amountTraded: 3400,
-    imageUrl: "https://example.com/governor.jpg",
-  },
-];
+import Alert from "../Alerts/alert";
+import { getOpenEvents } from "../../api/getOpenEvents";
+import { WebsocketContext } from "../../contexts/WebsocketContext";
 
 function Hero() {
   const [modalData, setModalData] = useState<{
     event: Event | null;
-    option: EventOptions | null;
     side: Side | null;
-  }>({ event: null, option: null, side: null });
+  }>({ event: null, side: null });
+  const [events, setEvents] = useState<Event[]>();
+  const socket = useContext(WebsocketContext);
 
-  const openTradeModal = (event: Event, option: EventOptions, side: Side) => {
-    setModalData({ event, option, side });
+  const openTradeModal = (event: Event, side: Side) => {
+    setModalData({ event, side });
   };
 
   const closeTradeModal = () => {
-    setModalData({ event: null, option: null, side: null });
+    setModalData({ event: null, side: null });
   };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const events = await getOpenEvents();
+      setEvents(events);
+    };
+
+    fetchEvents();
+  }, []);
+
+  useEffect(() => {
+    if (socket.connected) {
+      console.log("Connected! (Already established)");
+    }
+    socket.on("connect", () => {
+      console.log("Connected!");
+    });
+    socket.on("onPriceChange", (data) => {
+      if (!events) {
+        return;
+      }
+      const updatedEventPrice: Event[] = events.map((event) => {
+        if (data.body.id === event.id) {
+          event.noPrice = data.body.noPrice;
+          event.yesPrice = data.body.yesPrice;
+          return event;
+        }
+        return event;
+      });
+      setEvents(updatedEventPrice);
+    });
+
+    return () => {
+      console.log("unregistering events... ");
+      socket.off("connect");
+      socket.off("onPriceChange");
+    };
+  }, [events, socket]);
 
   return (
     <>
       <div className={css.heroContainer}>
         <div className={css.eventsList}>
-          <EventList events={binaryEvent} onOpenModal={openTradeModal} />
+          <EventList events={events} onOpenModal={openTradeModal} />
         </div>
         <Alert />
-        {modalData.event && modalData.side && modalData.option && (
+        {modalData.event && modalData.side && (
           <ProtectedRoute>
             <TradeModal
               event={modalData.event}
               side={modalData.side}
-              option={modalData.option}
               onClose={closeTradeModal}
             />
           </ProtectedRoute>

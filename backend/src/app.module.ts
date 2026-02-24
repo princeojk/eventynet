@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { BalanceModule } from './balance/balance.module';
 import { GatewayModule } from './gateway/gateway.module';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { GatewayModule } from './gateway/gateway.module';
     UserModule,
     BalanceModule,
     GatewayModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService],

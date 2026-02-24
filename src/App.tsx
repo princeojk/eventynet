@@ -9,26 +9,29 @@ import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./ProtectedRoute";
 import { AlertProvider } from "./components/Alerts/AlertContext";
 import Alert from "./components/Alerts/Alert";
+import { WebsocketProvider } from "./contexts/WebsocketProvider";
 
 function App() {
   return (
     <AuthProvider>
       <AlertProvider>
-        <Header />
-        <Alert />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+        <WebsocketProvider>
+          <Header />
+          <Alert />
+          <Routes>
+            <Route path="/" element={<Hero />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </WebsocketProvider>
       </AlertProvider>
     </AuthProvider>
   );

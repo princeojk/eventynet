@@ -1,6 +1,6 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import css from "./tradeModal.module.scss";
-import type { Event, EventOptions, Side } from "../../types";
+import type { Event, Side } from "../../types";
 import Button from "../Buttons/Button";
 import Input from "../Input/Input";
 import { payoutReducer } from "./tradeModal.reducer";
@@ -8,17 +8,20 @@ import AccountBalance from "../AccountBalance/AccountBalance";
 import DepositModal from "../../depositModal/DepositModal";
 import { placetrade } from "../../api/placeTrade";
 import AlertContext from "../Alerts/AlertContext";
+import { WebsocketContext } from "../../contexts/WebsocketContext";
 
 interface modalProps {
   event: Event;
   side: Side;
-  option: EventOptions;
   onClose: () => void;
 }
 
-const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
+const TradeModal: React.FC<modalProps> = ({ event, side, onClose }) => {
+  const socket = useContext(WebsocketContext);
   const alert = useContext(AlertContext);
-  const price = side === "YES" ? option.yesPrice : option.noPrice;
+  const [yesPrice, setYesPrice] = useState(event.yesPrice);
+  const [noPrice, setNoPrice] = useState(event.noPrice);
+  const price = side === "YES" ? event.yesPrice : event.noPrice;
   const [state, dispatch] = useReducer(payoutReducer, {
     selectedSide: side,
     payout: 0,
@@ -28,10 +31,32 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
   const [depositModal, setDepositModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (socket.connected) {
+      console.log("Connected! (Already established)");
+    }
+    socket.on("connect", () => {
+      console.log("Connected!");
+    });
+    socket.on("onPriceChange", (data) => {
+      console.log("updatePrice event ");
+      if (event.id === data.body.id) {
+        setYesPrice(data.body.yesPrice);
+        setNoPrice(data.body.noPrice);
+      }
+    });
+
+    return () => {
+      console.log("unregistering events... ");
+      socket.off("connect");
+      socket.off("onPriceChange");
+    };
+  }, [event.id, socket]);
+
   const handleTrade = () => {
     if (state.inputPayload === 0) {
-      console.log("tk zero amount");
       alert?.error("Please enter an amount to place trade", 1);
+      return;
     }
 
     try {
@@ -67,14 +92,14 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
               dispatch({
                 type: "selectSide",
                 selectedSide: "YES",
-                price: option.yesPrice,
+                price: event.yesPrice,
                 inputPayload: state.inputPayload,
               });
             }}
           >
             <div>
               <p>YES</p>
-              <p>₦{option.yesPrice}</p>
+              <p>₦{yesPrice}</p>
             </div>
           </Button>
           <Button
@@ -84,14 +109,14 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
               dispatch({
                 type: "selectSide",
                 selectedSide: "NO",
-                price: option.noPrice,
+                price: event.noPrice,
                 inputPayload: state.inputPayload,
               });
             }}
           >
             <div>
               <p>NO</p>
-              <p>₦{option.noPrice}</p>
+              <p>₦{noPrice}</p>
             </div>
           </Button>
         </div>

@@ -1,18 +1,18 @@
-import type { Event, EventOptions, Side } from "../../types";
+import type { Event, Side } from "../../types";
 import type React from "react";
 import EventsCard from "../Events/EventsCard";
 import css from "./EventsList.module.scss";
 
 interface EventListProps {
-  events: Event[];
-  onOpenModal: (event: Event, option: EventOptions, side: Side) => void;
+  events: Event[] | undefined;
+  onOpenModal: (event: Event, side: Side) => void;
 }
 
 const EventList: React.FC<EventListProps> = ({ events, onOpenModal }) => {
   return (
     <>
       <div className={css.eventGrid}>
-        {events.map((event) => (
+        {events?.map((event) => (
           <>
             <EventsCard
               key={event.id}

@@ -25,7 +25,8 @@ export const placetrade = async (
     body: JSON.stringify(body),
   });
 
-  if (res.ok) {
+  if (!res.ok) {
     const body = await res.json();
+    console.log(body);
   }
 };

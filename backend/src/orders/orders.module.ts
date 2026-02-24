@@ -7,6 +7,7 @@ import { OrdersRepository } from './orders.repository';
 import { BalanceService } from 'src/balance/balance.service';
 import { BalanceRepository } from 'src/balance/balance.repository';
 import { EventRepository } from 'src/event/event.repository';
+import { MyGateway } from 'src/gateway/gateway';
 
 @Module({
   imports: [PrismaModule],
@@ -18,6 +19,7 @@ import { EventRepository } from 'src/event/event.repository';
     BalanceRepository,
     OrdersService,
     EventRepository,
+    MyGateway,
   ],
 })
 export class OrdersModule {}
